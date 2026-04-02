@@ -1,0 +1,595 @@
+17:45:24 [INFO   ] harvester.main: ============================================================
+17:45:24 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+17:45:24 [INFO   ] harvester.main:   Inicio: 2026-03-30 17:45:24
+17:45:24 [INFO   ] harvester.main: ============================================================
+17:45:24 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+17:45:24 [INFO   ] harvester.main: ==================================================
+17:45:24 [INFO   ] harvester.main: SYNC: Sucursales
+17:45:24 [INFO   ] harvester.main: ==================================================
+17:45:24 [INFO   ] harvester.db: Sync iniciada: offices (log_id=1)
+17:45:49 [INFO   ] harvester.bsale_client: Paginando /offices.json: 4 registros esperados
+17:45:49 [INFO   ] harvester.bsale_client: Paginacion /offices.json completada: 4/4 items obtenidos
+17:45:49 [INFO   ] harvester.db: Sync finalizada (log_id=1): SUCCESS | fetched=4 inserted=4 updated=0 skipped=0
+17:45:49 [INFO   ] harvester.main:   -> Sucursales en 25.1s | {'fetched': 4, 'inserted': 4, 'skipped': 0}
+17:45:49 [INFO   ] harvester.main: ==================================================
+17:45:49 [INFO   ] harvester.main: SYNC: Categorias
+17:45:49 [INFO   ] harvester.main: ==================================================
+17:45:49 [INFO   ] harvester.db: Sync iniciada: product_types (log_id=2)
+17:45:50 [INFO   ] harvester.bsale_client: Paginando /product_types.json: 246 registros esperados
+17:45:55 [INFO   ] harvester.bsale_client: Paginacion /product_types.json completada: 246/246 items obtenidos
+17:45:55 [INFO   ] harvester.db: Sync finalizada (log_id=2): SUCCESS | fetched=246 inserted=246 updated=0 skipped=0
+17:45:55 [INFO   ] harvester.main:   -> Categorias en 5.3s | {'fetched': 246, 'inserted': 246, 'skipped': 0}
+17:45:55 [INFO   ] harvester.main: ==================================================
+17:45:55 [INFO   ] harvester.main: SYNC: Tipos de Documento
+17:45:55 [INFO   ] harvester.main: ==================================================
+17:45:55 [INFO   ] harvester.db: Sync iniciada: document_types (log_id=3)
+17:45:55 [INFO   ] harvester.bsale_client: Paginando /document_types.json: 11 registros esperados
+17:45:55 [INFO   ] harvester.bsale_client: Paginacion /document_types.json completada: 11/11 items obtenidos
+17:45:55 [INFO   ] harvester.db: Sync finalizada (log_id=3): SUCCESS | fetched=11 inserted=11 updated=0 skipped=0
+17:45:55 [INFO   ] harvester.main:   -> Tipos de Documento en 0.8s | {'fetched': 11, 'inserted': 11, 'skipped': 0}
+17:45:55 [INFO   ] harvester.main: ==================================================
+17:45:55 [INFO   ] harvester.main: SYNC: Productos y Variantes
+17:45:55 [INFO   ] harvester.main: ==================================================
+17:45:55 [INFO   ] harvester.db: Sync iniciada: variants (log_id=4)
+17:45:56 [INFO   ] harvester.bsale_client: Paginando /variants.json: 3375 registros esperados
+17:47:51 [INFO   ] harvester.bsale_client: Paginacion /variants.json completada: 3375/3375 items obtenidos
+17:47:51 [ERROR  ] harvester.db: Sync finalizada (log_id=4): FAILED | fetched=3375 inserted=0 updated=0 skipped=0
+17:47:51 [ERROR  ] harvester.main: Error fatal en harvester: inserción o actualización en la tabla «products» viola la llave foránea «products_bsale_product_type_id_fkey»
+DETAIL:  La llave (bsale_product_type_id)=(95) no está presente en la tabla «product_types».
+Traceback (most recent call last):
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 149, in main
+    run_masters()
+    ~~~~~~~~~~~^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 71, in run_masters
+    result = func()
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\sync_masters.py", line 280, in sync_variants
+    db.execute_batch(sql_prod, list(products_seen.values()))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\db.py", line 80, in execute_batch
+    psycopg2.extras.execute_batch(cur, sql, rows, page_size=page_size)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\extras.py", line 1216, in execute_batch
+    cur.execute(b";".join(sqls))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: inserción o actualización en la tabla «products» viola la llave foránea «products_bsale_product_type_id_fkey»
+DETAIL:  La llave (bsale_product_type_id)=(95) no está presente en la tabla «product_types».
+
+17:47:51 [INFO   ] harvester.db: Pool de conexiones cerrado
+17:48:56 [INFO   ] harvester.main: ============================================================
+17:48:56 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+17:48:56 [INFO   ] harvester.main:   Inicio: 2026-03-30 17:48:56
+17:48:56 [INFO   ] harvester.main: ============================================================
+17:48:56 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+17:48:56 [INFO   ] harvester.main: ==================================================
+17:48:56 [INFO   ] harvester.main: SYNC: Sucursales
+17:48:56 [INFO   ] harvester.main: ==================================================
+17:48:56 [INFO   ] harvester.db: Sync iniciada: offices (log_id=5)
+17:48:57 [INFO   ] harvester.bsale_client: Paginando /offices.json: 4 registros esperados
+17:48:57 [INFO   ] harvester.bsale_client: Paginacion /offices.json completada: 4/4 items obtenidos
+17:48:57 [INFO   ] harvester.db: Sync finalizada (log_id=5): SUCCESS | fetched=4 inserted=4 updated=0 skipped=0
+17:48:57 [INFO   ] harvester.main:   -> Sucursales en 0.8s | {'fetched': 4, 'inserted': 4, 'skipped': 0}
+17:48:57 [INFO   ] harvester.main: ==================================================
+17:48:57 [INFO   ] harvester.main: SYNC: Categorias
+17:48:57 [INFO   ] harvester.main: ==================================================
+17:48:57 [INFO   ] harvester.db: Sync iniciada: product_types (log_id=6)
+17:48:58 [INFO   ] harvester.bsale_client: Paginando /product_types.json: 246 registros esperados
+17:49:01 [INFO   ] harvester.bsale_client: Paginacion /product_types.json completada: 246/246 items obtenidos
+17:49:01 [INFO   ] harvester.db: Sync finalizada (log_id=6): SUCCESS | fetched=246 inserted=246 updated=0 skipped=0
+17:49:01 [INFO   ] harvester.main:   -> Categorias en 3.8s | {'fetched': 246, 'inserted': 246, 'skipped': 0}
+17:49:01 [INFO   ] harvester.main: ==================================================
+17:49:01 [INFO   ] harvester.main: SYNC: Tipos de Documento
+17:49:01 [INFO   ] harvester.main: ==================================================
+17:49:01 [INFO   ] harvester.db: Sync iniciada: document_types (log_id=7)
+17:49:02 [INFO   ] harvester.bsale_client: Paginando /document_types.json: 11 registros esperados
+17:49:02 [INFO   ] harvester.bsale_client: Paginacion /document_types.json completada: 11/11 items obtenidos
+17:49:02 [INFO   ] harvester.db: Sync finalizada (log_id=7): SUCCESS | fetched=11 inserted=11 updated=0 skipped=0
+17:49:02 [INFO   ] harvester.main:   -> Tipos de Documento en 0.9s | {'fetched': 11, 'inserted': 11, 'skipped': 0}
+17:49:02 [INFO   ] harvester.main: ==================================================
+17:49:02 [INFO   ] harvester.main: SYNC: Productos y Variantes
+17:49:02 [INFO   ] harvester.main: ==================================================
+17:49:02 [INFO   ] harvester.db: Sync iniciada: variants (log_id=8)
+17:49:03 [INFO   ] harvester.bsale_client: Paginando /variants.json: 3375 registros esperados
+17:50:05 [INFO   ] harvester.bsale_client: Paginacion /variants.json completada: 3375/3375 items obtenidos
+17:50:05 [WARNING] harvester.sync_masters: Encontradas 1 categorias huerfanas (eliminadas en BSale): {95}
+17:50:06 [INFO   ] harvester.sync_masters: Categorias huerfanas resueltas: 1
+17:50:06 [INFO   ] harvester.sync_masters: Products upserted: 3094
+17:50:06 [INFO   ] harvester.db: Sync finalizada (log_id=8): SUCCESS | fetched=3375 inserted=3375 updated=0 skipped=0
+17:50:06 [INFO   ] harvester.main:   -> Productos y Variantes en 64.4s | {'fetched': 3375, 'inserted': 3375, 'skipped': 0}
+17:50:06 [INFO   ] harvester.main: ============================================================
+17:50:06 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 70.0 segundos (1.2 min)
+17:50:06 [INFO   ] harvester.main: ============================================================
+17:50:06 [INFO   ] harvester.db: Pool de conexiones cerrado
+17:50:14 [INFO   ] harvester.main: ============================================================
+17:50:14 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+17:50:14 [INFO   ] harvester.main:   Inicio: 2026-03-30 17:50:14
+17:50:14 [INFO   ] harvester.main: ============================================================
+17:50:14 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+17:50:14 [INFO   ] harvester.main: ==================================================
+17:50:14 [INFO   ] harvester.main: SYNC: Stock Levels
+17:50:14 [INFO   ] harvester.main: ==================================================
+17:50:14 [INFO   ] harvester.db: Sync iniciada: stock_levels (log_id=9)
+17:50:16 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 3369 registros esperados
+17:51:28 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 3369/3369 items obtenidos
+17:51:28 [INFO   ] harvester.sync_masters: Stock office 4: 3369 registros
+17:51:30 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 3369 registros esperados
+17:53:00 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 3369/3369 items obtenidos
+17:53:00 [INFO   ] harvester.sync_masters: Stock office 3: 3369 registros
+17:53:01 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 3369 registros esperados
+17:55:02 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 3369/3369 items obtenidos
+17:55:02 [INFO   ] harvester.sync_masters: Stock office 1: 3369 registros
+17:55:03 [INFO   ] harvester.db: Sync finalizada (log_id=9): SUCCESS | fetched=10107 inserted=10107 updated=0 skipped=0
+17:55:03 [INFO   ] harvester.main:   -> Stock en 288.3s | {'fetched': 10107, 'inserted': 10107, 'skipped': 0}
+17:55:03 [INFO   ] harvester.main: ==================================================
+17:55:03 [INFO   ] harvester.main: SYNC: Costos de Variantes (puede tardar ~7 min)
+17:55:03 [INFO   ] harvester.main: ==================================================
+17:55:03 [INFO   ] harvester.db: Sync iniciada: variant_costs (log_id=10)
+17:55:03 [INFO   ] harvester.sync_masters: Sincronizando costos para 3375 variantes...
+17:56:15 [INFO   ] harvester.sync_masters: Costos: 200/3375 procesados
+17:56:50 [INFO   ] harvester.sync_masters: Costos: 400/3375 procesados
+17:57:26 [INFO   ] harvester.sync_masters: Costos: 600/3375 procesados
+18:00:03 [INFO   ] harvester.sync_masters: Costos: 800/3375 procesados
+18:00:41 [INFO   ] harvester.sync_masters: Costos: 1000/3375 procesados
+18:01:00 [INFO   ] harvester.main: ============================================================
+18:01:00 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+18:01:00 [INFO   ] harvester.main:   Inicio: 2026-03-30 18:01:00
+18:01:00 [INFO   ] harvester.main: ============================================================
+18:01:00 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+18:01:00 [INFO   ] harvester.main: ==================================================
+18:01:00 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+18:01:00 [INFO   ] harvester.main: ==================================================
+18:01:00 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=11)
+18:01:01 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 555 registros esperados
+18:01:12 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/1088/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:01:12 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/1098/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:01:13 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/1094/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:01:14 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/1097/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:01:14 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 555/555 items obtenidos
+18:01:14 [INFO   ] harvester.sync_transactions: Recepciones office 4: 555 registros
+18:01:14 [ERROR  ] harvester.db: Sync finalizada (log_id=11): FAILED | fetched=555 inserted=0 updated=0 skipped=0
+18:01:14 [ERROR  ] harvester.main: Error fatal en harvester: inserción o actualización en la tabla «reception_details» viola la llave foránea «reception_details_bsale_variant_id_fkey»
+DETAIL:  La llave (bsale_variant_id)=(3030) no está presente en la tabla «variants».
+Traceback (most recent call last):
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 153, in main
+    run_transactions()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 103, in run_transactions
+    result = sync_receptions()
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\sync_transactions.py", line 378, in sync_receptions
+    db.execute_batch(sql_det, det_rows)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\db.py", line 80, in execute_batch
+    psycopg2.extras.execute_batch(cur, sql, rows, page_size=page_size)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\extras.py", line 1216, in execute_batch
+    cur.execute(b";".join(sqls))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: inserción o actualización en la tabla «reception_details» viola la llave foránea «reception_details_bsale_variant_id_fkey»
+DETAIL:  La llave (bsale_variant_id)=(3030) no está presente en la tabla «variants».
+
+18:01:14 [INFO   ] harvester.db: Pool de conexiones cerrado
+18:01:14 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/1100/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:01:17 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/1102/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:01:57 [INFO   ] harvester.sync_masters: Costos: 1200/3375 procesados
+18:02:31 [INFO   ] harvester.main: ============================================================
+18:02:31 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+18:02:31 [INFO   ] harvester.main:   Inicio: 2026-03-30 18:02:31
+18:02:31 [INFO   ] harvester.main: ============================================================
+18:02:31 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+18:02:31 [INFO   ] harvester.main: SYNC: Solo costos
+18:02:31 [INFO   ] harvester.db: Sync iniciada: variant_costs (log_id=12)
+18:02:31 [INFO   ] harvester.sync_masters: Sincronizando costos para 3375 variantes...
+18:02:47 [INFO   ] harvester.sync_masters: Costos: 1400/3375 procesados
+18:03:30 [INFO   ] harvester.sync_masters: Costos: 200/3375 procesados
+18:04:38 [INFO   ] harvester.sync_masters: Costos: 1600/3375 procesados
+18:06:28 [INFO   ] harvester.sync_masters: Costos: 400/3375 procesados
+18:07:13 [INFO   ] harvester.sync_masters: Costos: 1800/3375 procesados
+18:08:27 [INFO   ] harvester.sync_masters: Costos: 600/3375 procesados
+18:09:22 [INFO   ] harvester.sync_masters: Costos: 2000/3375 procesados
+18:09:44 [INFO   ] harvester.sync_masters: Costos: 800/3375 procesados
+18:10:00 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/2126/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:10:00 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/2124/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:10:00 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/828/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:10:01 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/827/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:10:01 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/2131/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:10:14 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/2156/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:10:14 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/2157/costs.json: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+18:10:26 [INFO   ] harvester.sync_masters: Costos: 2200/3375 procesados
+18:10:30 [INFO   ] harvester.sync_masters: Costos: 1000/3375 procesados
+18:11:21 [INFO   ] harvester.sync_masters: Costos: 2400/3375 procesados
+18:11:27 [INFO   ] harvester.sync_masters: Costos: 1200/3375 procesados
+18:12:51 [INFO   ] harvester.sync_masters: Costos: 2600/3375 procesados
+18:12:59 [INFO   ] harvester.sync_masters: Costos: 1400/3375 procesados
+18:13:31 [INFO   ] harvester.sync_masters: Costos: 2800/3375 procesados
+18:13:37 [INFO   ] harvester.sync_masters: Costos: 1600/3375 procesados
+18:14:09 [INFO   ] harvester.sync_masters: Costos: 3000/3375 procesados
+18:14:18 [INFO   ] harvester.sync_masters: Costos: 1800/3375 procesados
+18:16:29 [INFO   ] harvester.sync_masters: Costos: 3200/3375 procesados
+18:16:39 [INFO   ] harvester.sync_masters: Costos: 2000/3375 procesados
+18:18:13 [WARNING] harvester.sync_masters: 2040 variantes sin costo registrado (effective_cost=0)
+18:18:13 [INFO   ] harvester.db: Sync finalizada (log_id=10): SUCCESS | fetched=3375 inserted=3375 updated=0 skipped=0
+18:18:13 [INFO   ] harvester.main:   -> Costos en 1390.0s | {'fetched': 3375, 'inserted': 3375, 'skipped': 0}
+18:18:13 [INFO   ] harvester.main: ============================================================
+18:18:13 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 1678.2 segundos (28.0 min)
+18:18:13 [INFO   ] harvester.main: ============================================================
+18:18:13 [INFO   ] harvester.db: Pool de conexiones cerrado
+18:18:24 [INFO   ] harvester.sync_masters: Costos: 2200/3375 procesados
+18:19:11 [INFO   ] harvester.sync_masters: Costos: 2400/3375 procesados
+18:20:40 [INFO   ] harvester.sync_masters: Costos: 2600/3375 procesados
+18:21:49 [INFO   ] harvester.sync_masters: Costos: 2800/3375 procesados
+18:22:25 [INFO   ] harvester.sync_masters: Costos: 3000/3375 procesados
+18:24:51 [INFO   ] harvester.sync_masters: Costos: 3200/3375 procesados
+18:26:03 [WARNING] harvester.sync_masters: 2041 variantes sin costo registrado (effective_cost=0)
+18:26:03 [INFO   ] harvester.db: Sync finalizada (log_id=12): SUCCESS | fetched=3375 inserted=3375 updated=0 skipped=0
+18:26:03 [INFO   ] harvester.main: ============================================================
+18:26:03 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 1411.8 segundos (23.5 min)
+18:26:03 [INFO   ] harvester.main: ============================================================
+18:26:03 [INFO   ] harvester.db: Pool de conexiones cerrado
+18:26:10 [INFO   ] harvester.main: ============================================================
+18:26:10 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+18:26:10 [INFO   ] harvester.main:   Inicio: 2026-03-30 18:26:10
+18:26:10 [INFO   ] harvester.main: ============================================================
+18:26:10 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+18:26:10 [INFO   ] harvester.main: ==================================================
+18:26:10 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+18:26:10 [INFO   ] harvester.main: ==================================================
+18:26:10 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=13)
+18:26:12 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 555 registros esperados
+18:26:23 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 555/555 items obtenidos
+18:26:23 [INFO   ] harvester.sync_transactions: Recepciones office 4: 555 registros
+18:26:24 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 2336 registros esperados
+18:27:23 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 2336/2336 items obtenidos
+18:27:23 [INFO   ] harvester.sync_transactions: Recepciones office 3: 2336 registros
+18:30:59 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 5384 registros esperados
+18:35:35 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 5384/5384 items obtenidos
+18:35:35 [INFO   ] harvester.sync_transactions: Recepciones office 1: 5384 registros
+18:37:18 [ERROR  ] harvester.db: Sync finalizada (log_id=13): FAILED | fetched=8275 inserted=0 updated=0 skipped=0
+18:37:18 [ERROR  ] harvester.main: Error fatal en harvester: desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 12, escala 2 debe redondear a un valor absoluto menor que 10^10.
+Traceback (most recent call last):
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 153, in main
+    run_transactions()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 103, in run_transactions
+    result = sync_receptions()
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\sync_transactions.py", line 378, in sync_receptions
+    db.execute_batch(sql_det, det_rows)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\db.py", line 80, in execute_batch
+    psycopg2.extras.execute_batch(cur, sql, rows, page_size=page_size)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\extras.py", line 1216, in execute_batch
+    cur.execute(b";".join(sqls))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+psycopg2.errors.NumericValueOutOfRange: desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 12, escala 2 debe redondear a un valor absoluto menor que 10^10.
+
+18:37:18 [INFO   ] harvester.db: Pool de conexiones cerrado
+21:37:57 [INFO   ] harvester.main: ============================================================
+21:37:57 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+21:37:57 [INFO   ] harvester.main:   Inicio: 2026-03-30 21:37:57
+21:37:57 [INFO   ] harvester.main: ============================================================
+21:37:57 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+21:37:57 [INFO   ] harvester.main: ==================================================
+21:37:57 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+21:37:57 [INFO   ] harvester.main: ==================================================
+21:37:57 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=14)
+21:37:59 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 555 registros esperados
+21:38:11 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 555/555 items obtenidos
+21:38:11 [INFO   ] harvester.sync_transactions: Recepciones office 4: 555 registros
+21:38:12 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 2339 registros esperados
+21:39:04 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 2339/2339 items obtenidos
+21:39:04 [INFO   ] harvester.sync_transactions: Recepciones office 3: 2339 registros
+21:40:38 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 5401 registros esperados
+21:42:37 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 5401/5401 items obtenidos
+21:42:37 [INFO   ] harvester.sync_transactions: Recepciones office 1: 5401 registros
+21:43:35 [ERROR  ] harvester.db: Sync finalizada (log_id=14): FAILED | fetched=8295 inserted=0 updated=0 skipped=0
+21:43:35 [ERROR  ] harvester.main: Error fatal en harvester: desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 12, escala 2 debe redondear a un valor absoluto menor que 10^10.
+Traceback (most recent call last):
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 153, in main
+    run_transactions()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\run_harvest.py", line 103, in run_transactions
+    result = sync_receptions()
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\sync_transactions.py", line 378, in sync_receptions
+    db.execute_batch(sql_det, det_rows)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\.claude\worktrees\ecstatic-tu\harvester\db.py", line 80, in execute_batch
+    psycopg2.extras.execute_batch(cur, sql, rows, page_size=page_size)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\juana\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\extras.py", line 1216, in execute_batch
+    cur.execute(b";".join(sqls))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+psycopg2.errors.NumericValueOutOfRange: desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 12, escala 2 debe redondear a un valor absoluto menor que 10^10.
+
+21:43:35 [INFO   ] harvester.db: Pool de conexiones cerrado
+21:44:00 [INFO   ] harvester.main: ============================================================
+21:44:00 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+21:44:00 [INFO   ] harvester.main:   Inicio: 2026-03-30 21:44:00
+21:44:00 [INFO   ] harvester.main: ============================================================
+21:44:00 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+21:44:00 [INFO   ] harvester.main: ==================================================
+21:44:00 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+21:44:00 [INFO   ] harvester.main: ==================================================
+21:44:00 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=15)
+21:44:02 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 555 registros esperados
+21:44:13 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 555/555 items obtenidos
+21:44:13 [INFO   ] harvester.sync_transactions: Recepciones office 4: 555 registros
+21:44:14 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 2339 registros esperados
+21:45:01 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 2339/2339 items obtenidos
+21:45:01 [INFO   ] harvester.sync_transactions: Recepciones office 3: 2339 registros
+21:46:40 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 5401 registros esperados
+21:48:43 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 5401/5401 items obtenidos
+21:48:43 [INFO   ] harvester.sync_transactions: Recepciones office 1: 5401 registros
+21:49:53 [INFO   ] harvester.sync_transactions: Recepciones: 8295 headers, 14491 detalles
+21:49:53 [INFO   ] harvester.db: Sync finalizada (log_id=15): SUCCESS | fetched=8295 inserted=8295 updated=0 skipped=0
+21:49:53 [INFO   ] harvester.main:   -> Recepciones en 353.8s | {'fetched': 8295, 'inserted': 8295, 'skipped': 0, 'details_inserted': 14491}
+21:49:53 [INFO   ] harvester.main: ==================================================
+21:49:53 [INFO   ] harvester.main: SYNC: Documentos de Venta (~102K, puede tardar ~5 min)
+21:49:53 [INFO   ] harvester.main: ==================================================
+21:49:53 [INFO   ] harvester.db: Sync iniciada: documents (log_id=16)
+21:49:54 [INFO   ] harvester.sync_transactions: Documentos a sincronizar: 102306
+21:51:40 [INFO   ] harvester.sync_transactions: Documentos: 1000/102306 procesados
+21:51:55 [INFO   ] harvester.main: ============================================================
+21:51:55 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+21:51:55 [INFO   ] harvester.main:   Inicio: 2026-03-30 21:51:55
+21:51:55 [INFO   ] harvester.main: ============================================================
+21:51:55 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+21:51:55 [INFO   ] harvester.main: ==================================================
+21:51:55 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+21:51:55 [INFO   ] harvester.main: ==================================================
+21:51:55 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=17)
+21:51:56 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 555 registros esperados
+21:52:08 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 555/555 items obtenidos
+21:52:08 [INFO   ] harvester.sync_transactions: Recepciones office 4: 555 registros
+21:52:09 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 2339 registros esperados
+21:52:59 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 2339/2339 items obtenidos
+21:52:59 [INFO   ] harvester.sync_transactions: Recepciones office 3: 2339 registros
+21:53:02 [INFO   ] harvester.sync_transactions: Documentos: 2000/102306 procesados
+21:55:04 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 5401 registros esperados
+21:55:07 [INFO   ] harvester.sync_transactions: Documentos: 3000/102306 procesados
+21:58:13 [INFO   ] harvester.sync_transactions: Documentos: 4000/102306 procesados
+21:58:28 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 5401/5401 items obtenidos
+21:58:28 [INFO   ] harvester.sync_transactions: Recepciones office 1: 5401 registros
+21:59:05 [INFO   ] harvester.sync_transactions: Recepciones: 8295 headers, 14491 detalles
+21:59:05 [INFO   ] harvester.db: Sync finalizada (log_id=17): SUCCESS | fetched=8295 inserted=8295 updated=0 skipped=0
+21:59:05 [INFO   ] harvester.main:   -> Recepciones en 430.2s | {'fetched': 8295, 'inserted': 8295, 'skipped': 0, 'details_inserted': 14491}
+21:59:05 [INFO   ] harvester.main: ==================================================
+21:59:05 [INFO   ] harvester.main: SYNC: Documentos de Venta (~102K, puede tardar ~5 min)
+21:59:05 [INFO   ] harvester.main: ==================================================
+21:59:05 [INFO   ] harvester.db: Sync iniciada: documents (log_id=18)
+21:59:06 [INFO   ] harvester.sync_transactions: Documentos a sincronizar: 102306
+22:00:06 [INFO   ] harvester.sync_transactions: Documentos: 5000/102306 procesados
+22:00:38 [INFO   ] harvester.sync_transactions: Documentos: 1000/102306 procesados
+22:01:00 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/kawii_data)
+22:01:00 [INFO   ] harvester.db: Sync iniciada: documents (log_id=19)
+22:01:01 [INFO   ] harvester.sync_transactions: Documentos a sincronizar: 102306
+22:01:31 [INFO   ] harvester.sync_transactions: Documentos: 6000/102306 procesados
+22:01:51 [INFO   ] harvester.sync_transactions: Documentos: 2000/102306 procesados
+22:02:19 [INFO   ] harvester.sync_transactions: Documentos: 7000/102306 procesados
+22:02:33 [INFO   ] harvester.sync_transactions: Documentos: 1000/102306 procesados
+22:02:53 [INFO   ] harvester.sync_transactions: Documentos: 3000/102306 procesados
+22:03:12 [INFO   ] harvester.sync_transactions: Documentos: 8000/102306 procesados
+22:03:42 [INFO   ] harvester.sync_transactions: Documentos: 2000/102306 procesados
+22:04:08 [INFO   ] harvester.sync_transactions: Documentos: 9000/102306 procesados
+22:04:16 [INFO   ] harvester.sync_transactions: Documentos: 4000/102306 procesados
+22:04:42 [INFO   ] harvester.sync_transactions: Documentos: 3000/102306 procesados
+22:05:08 [INFO   ] harvester.sync_transactions: Documentos: 10000/102306 procesados
+22:05:52 [INFO   ] harvester.sync_transactions: Documentos: 5000/102306 procesados
+22:06:06 [INFO   ] harvester.sync_transactions: Documentos: 11000/102306 procesados
+22:06:10 [INFO   ] harvester.sync_transactions: Documentos: 4000/102306 procesados
+22:07:01 [INFO   ] harvester.sync_transactions: Documentos: 12000/102306 procesados
+22:07:02 [INFO   ] harvester.sync_transactions: Documentos: 6000/102306 procesados
+22:07:42 [INFO   ] harvester.sync_transactions: Documentos: 5000/102306 procesados
+22:07:54 [INFO   ] harvester.sync_transactions: Documentos: 7000/102306 procesados
+22:07:56 [INFO   ] harvester.sync_transactions: Documentos: 13000/102306 procesados
+22:08:53 [INFO   ] harvester.sync_transactions: Documentos: 8000/102306 procesados
+22:08:54 [INFO   ] harvester.sync_transactions: Documentos: 6000/102306 procesados
+22:08:59 [INFO   ] harvester.sync_transactions: Documentos: 14000/102306 procesados
+22:09:44 [INFO   ] harvester.sync_transactions: Documentos: 7000/102306 procesados
+22:09:48 [INFO   ] harvester.sync_transactions: Documentos: 9000/102306 procesados
+22:09:55 [INFO   ] harvester.sync_transactions: Documentos: 15000/102306 procesados
+22:10:38 [INFO   ] harvester.sync_transactions: Documentos: 8000/102306 procesados
+22:10:42 [INFO   ] harvester.sync_transactions: Documentos: 10000/102306 procesados
+22:10:53 [INFO   ] harvester.sync_transactions: Documentos: 16000/102306 procesados
+22:11:30 [INFO   ] harvester.sync_transactions: Documentos: 9000/102306 procesados
+22:11:37 [INFO   ] harvester.sync_transactions: Documentos: 11000/102306 procesados
+22:11:43 [INFO   ] harvester.sync_transactions: Documentos: 17000/102306 procesados
+22:12:28 [INFO   ] harvester.sync_transactions: Documentos: 10000/102306 procesados
+22:12:36 [INFO   ] harvester.sync_transactions: Documentos: 12000/102306 procesados
+22:12:39 [INFO   ] harvester.sync_transactions: Documentos: 18000/102306 procesados
+22:13:28 [INFO   ] harvester.sync_transactions: Documentos: 11000/102306 procesados
+22:13:32 [INFO   ] harvester.sync_transactions: Documentos: 13000/102306 procesados
+22:13:36 [INFO   ] harvester.sync_transactions: Documentos: 19000/102306 procesados
+22:14:26 [INFO   ] harvester.sync_transactions: Documentos: 12000/102306 procesados
+22:14:31 [INFO   ] harvester.sync_transactions: Documentos: 20000/102306 procesados
+22:14:32 [INFO   ] harvester.sync_transactions: Documentos: 14000/102306 procesados
+22:15:19 [INFO   ] harvester.sync_transactions: Documentos: 13000/102306 procesados
+22:15:26 [INFO   ] harvester.sync_transactions: Documentos: 21000/102306 procesados
+22:15:28 [INFO   ] harvester.sync_transactions: Documentos: 15000/102306 procesados
+22:16:16 [INFO   ] harvester.sync_transactions: Documentos: 14000/102306 procesados
+22:16:23 [INFO   ] harvester.sync_transactions: Documentos: 16000/102306 procesados
+22:16:24 [INFO   ] harvester.sync_transactions: Documentos: 22000/102306 procesados
+22:17:12 [INFO   ] harvester.sync_transactions: Documentos: 15000/102306 procesados
+22:17:16 [INFO   ] harvester.sync_transactions: Documentos: 23000/102306 procesados
+22:17:16 [INFO   ] harvester.sync_transactions: Documentos: 17000/102306 procesados
+22:18:13 [INFO   ] harvester.sync_transactions: Documentos: 16000/102306 procesados
+22:18:15 [INFO   ] harvester.sync_transactions: Documentos: 24000/102306 procesados
+22:18:16 [INFO   ] harvester.sync_transactions: Documentos: 18000/102306 procesados
+22:19:07 [INFO   ] harvester.sync_transactions: Documentos: 25000/102306 procesados
+22:19:08 [INFO   ] harvester.sync_transactions: Documentos: 17000/102306 procesados
+22:19:10 [INFO   ] harvester.sync_transactions: Documentos: 19000/102306 procesados
+22:20:04 [INFO   ] harvester.sync_transactions: Documentos: 26000/102306 procesados
+22:20:05 [INFO   ] harvester.sync_transactions: Documentos: 18000/102306 procesados
+22:20:09 [INFO   ] harvester.sync_transactions: Documentos: 20000/102306 procesados
+22:21:02 [INFO   ] harvester.sync_transactions: Documentos: 19000/102306 procesados
+22:21:04 [INFO   ] harvester.sync_transactions: Documentos: 27000/102306 procesados
+22:21:05 [INFO   ] harvester.sync_transactions: Documentos: 21000/102306 procesados
+22:21:56 [INFO   ] harvester.sync_transactions: Documentos: 20000/102306 procesados
+22:21:58 [INFO   ] harvester.sync_transactions: Documentos: 22000/102306 procesados
+22:21:59 [INFO   ] harvester.sync_transactions: Documentos: 28000/102306 procesados
+22:22:50 [INFO   ] harvester.sync_transactions: Documentos: 23000/102306 procesados
+22:22:54 [INFO   ] harvester.sync_transactions: Documentos: 29000/102306 procesados
+22:23:11 [INFO   ] harvester.sync_transactions: Documentos: 21000/102306 procesados
+22:23:43 [INFO   ] harvester.sync_transactions: Documentos: 24000/102306 procesados
+22:23:47 [INFO   ] harvester.sync_transactions: Documentos: 30000/102306 procesados
+22:24:05 [INFO   ] harvester.sync_transactions: Documentos: 22000/102306 procesados
+22:24:37 [INFO   ] harvester.sync_transactions: Documentos: 25000/102306 procesados
+22:24:41 [INFO   ] harvester.sync_transactions: Documentos: 31000/102306 procesados
+22:25:01 [INFO   ] harvester.sync_transactions: Documentos: 23000/102306 procesados
+22:25:38 [INFO   ] harvester.sync_transactions: Documentos: 26000/102306 procesados
+22:25:42 [INFO   ] harvester.sync_transactions: Documentos: 32000/102306 procesados
+22:26:15 [INFO   ] harvester.sync_transactions: Documentos: 24000/102306 procesados
+22:26:42 [INFO   ] harvester.sync_transactions: Documentos: 33000/102306 procesados
+22:26:45 [INFO   ] harvester.sync_transactions: Documentos: 27000/102306 procesados
+22:27:13 [INFO   ] harvester.sync_transactions: Documentos: 25000/102306 procesados
+22:27:40 [INFO   ] harvester.sync_transactions: Documentos: 34000/102306 procesados
+22:27:42 [INFO   ] harvester.sync_transactions: Documentos: 28000/102306 procesados
+22:28:07 [INFO   ] harvester.sync_transactions: Documentos: 26000/102306 procesados
+22:28:33 [INFO   ] harvester.sync_transactions: Documentos: 35000/102306 procesados
+22:28:41 [INFO   ] harvester.sync_transactions: Documentos: 29000/102306 procesados
+22:29:04 [INFO   ] harvester.sync_transactions: Documentos: 27000/102306 procesados
+22:29:32 [INFO   ] harvester.sync_transactions: Documentos: 36000/102306 procesados
+22:29:39 [INFO   ] harvester.sync_transactions: Documentos: 30000/102306 procesados
+22:30:00 [INFO   ] harvester.sync_transactions: Documentos: 28000/102306 procesados
+22:30:28 [INFO   ] harvester.sync_transactions: Documentos: 37000/102306 procesados
+22:30:41 [INFO   ] harvester.sync_transactions: Documentos: 31000/102306 procesados
+22:30:57 [INFO   ] harvester.sync_transactions: Documentos: 29000/102306 procesados
+22:31:25 [INFO   ] harvester.sync_transactions: Documentos: 38000/102306 procesados
+22:31:35 [INFO   ] harvester.sync_transactions: Documentos: 32000/102306 procesados
+22:31:50 [INFO   ] harvester.sync_transactions: Documentos: 30000/102306 procesados
+22:32:21 [INFO   ] harvester.sync_transactions: Documentos: 39000/102306 procesados
+22:32:29 [INFO   ] harvester.sync_transactions: Documentos: 33000/102306 procesados
+22:32:45 [INFO   ] harvester.sync_transactions: Documentos: 31000/102306 procesados
+22:33:17 [INFO   ] harvester.sync_transactions: Documentos: 40000/102306 procesados
+22:33:25 [INFO   ] harvester.sync_transactions: Documentos: 34000/102306 procesados
+22:33:38 [INFO   ] harvester.sync_transactions: Documentos: 32000/102306 procesados
+22:34:10 [INFO   ] harvester.sync_transactions: Documentos: 41000/102306 procesados
+22:34:17 [INFO   ] harvester.sync_transactions: Documentos: 35000/102306 procesados
+22:34:29 [INFO   ] harvester.sync_transactions: Documentos: 33000/102306 procesados
+22:35:16 [INFO   ] harvester.sync_transactions: Documentos: 36000/102306 procesados
+22:35:17 [INFO   ] harvester.sync_transactions: Documentos: 42000/102306 procesados
+22:37:10 [INFO   ] harvester.sync_transactions: Documentos: 34000/102306 procesados
+22:37:48 [INFO   ] harvester.sync_transactions: Documentos: 37000/102306 procesados
+22:37:50 [INFO   ] harvester.sync_transactions: Documentos: 43000/102306 procesados
+22:38:05 [INFO   ] harvester.sync_transactions: Documentos: 35000/102306 procesados
+22:39:26 [INFO   ] harvester.sync_transactions: Documentos: 38000/102306 procesados
+22:39:27 [INFO   ] harvester.sync_transactions: Documentos: 36000/102306 procesados
+22:39:27 [INFO   ] harvester.sync_transactions: Documentos: 44000/102306 procesados
+16:47:14 [INFO   ] harvester.main: ============================================================
+16:47:14 [INFO   ] harvester.main:   KAWII HARVESTER - BSale -> PostgreSQL
+16:47:14 [INFO   ] harvester.main:   Inicio: 2026-04-02 16:47:14
+16:47:14 [INFO   ] harvester.main: ============================================================
+16:47:14 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/coya_data)
+16:47:14 [INFO   ] harvester.main: ==================================================
+16:47:14 [INFO   ] harvester.main: SYNC: Sucursales
+16:47:14 [INFO   ] harvester.main: ==================================================
+16:47:14 [INFO   ] harvester.db: Sync iniciada: offices (log_id=1)
+16:47:15 [INFO   ] harvester.bsale_client: Paginando /offices.json: 5 registros esperados
+16:47:15 [INFO   ] harvester.bsale_client: Paginacion /offices.json completada: 5/5 items obtenidos
+16:47:15 [INFO   ] harvester.db: Sync finalizada (log_id=1): SUCCESS | fetched=5 inserted=5 updated=0 skipped=0
+16:47:15 [INFO   ] harvester.main:   -> Sucursales en 0.9s | {'fetched': 5, 'inserted': 5, 'skipped': 0}
+16:47:15 [INFO   ] harvester.main: ==================================================
+16:47:15 [INFO   ] harvester.main: SYNC: Categorias
+16:47:15 [INFO   ] harvester.main: ==================================================
+16:47:15 [INFO   ] harvester.db: Sync iniciada: product_types (log_id=2)
+16:47:15 [INFO   ] harvester.bsale_client: Paginando /product_types.json: 137 registros esperados
+16:47:17 [INFO   ] harvester.bsale_client: Paginacion /product_types.json completada: 137/137 items obtenidos
+16:47:17 [INFO   ] harvester.db: Sync finalizada (log_id=2): SUCCESS | fetched=137 inserted=137 updated=0 skipped=0
+16:47:17 [INFO   ] harvester.main:   -> Categorias en 2.2s | {'fetched': 137, 'inserted': 137, 'skipped': 0}
+16:47:17 [INFO   ] harvester.main: ==================================================
+16:47:17 [INFO   ] harvester.main: SYNC: Tipos de Documento
+16:47:17 [INFO   ] harvester.main: ==================================================
+16:47:17 [INFO   ] harvester.db: Sync iniciada: document_types (log_id=3)
+16:47:18 [INFO   ] harvester.bsale_client: Paginando /document_types.json: 11 registros esperados
+16:47:18 [INFO   ] harvester.bsale_client: Paginacion /document_types.json completada: 11/11 items obtenidos
+16:47:18 [INFO   ] harvester.db: Sync finalizada (log_id=3): SUCCESS | fetched=11 inserted=11 updated=0 skipped=0
+16:47:18 [INFO   ] harvester.main:   -> Tipos de Documento en 0.7s | {'fetched': 11, 'inserted': 11, 'skipped': 0}
+16:47:18 [INFO   ] harvester.main: ==================================================
+16:47:18 [INFO   ] harvester.main: SYNC: Productos y Variantes
+16:47:18 [INFO   ] harvester.main: ==================================================
+16:47:18 [INFO   ] harvester.db: Sync iniciada: variants (log_id=4)
+16:47:18 [INFO   ] harvester.bsale_client: Paginando /variants.json: 1329 registros esperados
+16:47:44 [INFO   ] harvester.bsale_client: Paginacion /variants.json completada: 1329/1329 items obtenidos
+16:47:44 [INFO   ] harvester.sync_masters: Products upserted: 1259
+16:47:44 [INFO   ] harvester.db: Sync finalizada (log_id=4): SUCCESS | fetched=1329 inserted=1329 updated=0 skipped=0
+16:47:44 [INFO   ] harvester.main:   -> Productos y Variantes en 26.3s | {'fetched': 1329, 'inserted': 1329, 'skipped': 0}
+16:47:44 [INFO   ] harvester.main: ==================================================
+16:47:44 [INFO   ] harvester.main: SYNC: Stock Levels
+16:47:44 [INFO   ] harvester.main: ==================================================
+16:47:44 [INFO   ] harvester.db: Sync iniciada: stock_levels (log_id=5)
+16:47:45 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 1329 registros esperados
+16:48:09 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 1329/1329 items obtenidos
+16:48:09 [INFO   ] harvester.sync_masters: Stock office 5: 1329 registros
+16:48:10 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 1329 registros esperados
+16:48:39 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 1329/1329 items obtenidos
+16:48:39 [INFO   ] harvester.sync_masters: Stock office 1: 1329 registros
+16:48:40 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 1329 registros esperados
+16:49:07 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 1329/1329 items obtenidos
+16:49:07 [INFO   ] harvester.sync_masters: Stock office 3: 1329 registros
+16:49:07 [INFO   ] harvester.db: Sync finalizada (log_id=5): SUCCESS | fetched=3987 inserted=3987 updated=0 skipped=0
+16:49:07 [INFO   ] harvester.main:   -> Stock en 83.0s | {'fetched': 3987, 'inserted': 3987, 'skipped': 0}
+16:49:07 [INFO   ] harvester.main: ==================================================
+16:49:07 [INFO   ] harvester.main: SYNC: Costos de Variantes (puede tardar ~7 min)
+16:49:07 [INFO   ] harvester.main: ==================================================
+16:49:07 [INFO   ] harvester.db: Sync iniciada: variant_costs (log_id=6)
+16:49:07 [INFO   ] harvester.sync_masters: Sincronizando costos para 1329 variantes...
+16:49:38 [INFO   ] harvester.sync_masters: Costos: 200/1329 procesados
+16:50:08 [INFO   ] harvester.sync_masters: Costos: 400/1329 procesados
+16:50:40 [INFO   ] harvester.sync_masters: Costos: 600/1329 procesados
+16:51:11 [INFO   ] harvester.sync_masters: Costos: 800/1329 procesados
+16:51:45 [INFO   ] harvester.sync_masters: Costos: 1000/1329 procesados
+16:52:45 [INFO   ] harvester.sync_masters: Costos: 1200/1329 procesados
+16:53:04 [WARNING] harvester.sync_masters: 465 variantes sin costo registrado (effective_cost=0)
+16:53:04 [INFO   ] harvester.db: Sync finalizada (log_id=6): SUCCESS | fetched=1329 inserted=1329 updated=0 skipped=0
+16:53:04 [INFO   ] harvester.main:   -> Costos en 236.9s | {'fetched': 1329, 'inserted': 1329, 'skipped': 0}
+16:53:04 [INFO   ] harvester.main: ==================================================
+16:53:04 [INFO   ] harvester.main: SYNC: Stock History (snapshot del dia)
+16:53:04 [INFO   ] harvester.main: ==================================================
+16:53:04 [INFO   ] harvester.db: Sync iniciada: stock_history (log_id=7)
+16:53:04 [INFO   ] harvester.sync_masters: Stock history: 3987 registros para 2026-04-02
+16:53:04 [INFO   ] harvester.db: Sync finalizada (log_id=7): SUCCESS | fetched=0 inserted=3987 updated=0 skipped=0
+16:53:04 [INFO   ] harvester.main:   -> Stock History en 0.1s | {'inserted': 3987}
+16:53:04 [INFO   ] harvester.main: ==================================================
+16:53:04 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+16:53:04 [INFO   ] harvester.main: ==================================================
+16:53:04 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=8)
+16:53:05 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 0/? items obtenidos
+16:53:05 [INFO   ] harvester.sync_transactions: Recepciones office 5: 0 registros
+16:53:06 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 1202 registros esperados
+16:53:53 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 1202/1202 items obtenidos
+16:53:53 [INFO   ] harvester.sync_transactions: Recepciones office 1: 1202 registros
+16:53:58 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 285 registros esperados
+16:54:05 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 285/285 items obtenidos
+16:54:05 [INFO   ] harvester.sync_transactions: Recepciones office 3: 285 registros
+16:54:12 [INFO   ] harvester.sync_transactions: Recepciones: 1487 headers, 2295 detalles
+16:54:12 [INFO   ] harvester.db: Sync finalizada (log_id=8): SUCCESS | fetched=1487 inserted=1487 updated=0 skipped=0
+16:54:12 [INFO   ] harvester.main:   -> Recepciones en 67.9s | {'fetched': 1487, 'inserted': 1487, 'skipped': 0, 'details_inserted': 2295}
+16:54:12 [INFO   ] harvester.main: ==================================================
+16:54:12 [INFO   ] harvester.main: SYNC: Documentos de Venta (~102K, puede tardar ~5 min)
+16:54:12 [INFO   ] harvester.main: ==================================================
+16:54:12 [INFO   ] harvester.db: Sync iniciada: documents (log_id=9)
+16:54:13 [INFO   ] harvester.sync_transactions: Documentos a sincronizar: 14587
+16:54:13 [INFO   ] harvester.sync_transactions: TURBO: 292 paginas pre-computadas, 6 workers
+16:54:26 [INFO   ] harvester.sync_transactions: TURBO: 20/292 paginas | 1000/14587 docs procesados
+16:54:33 [INFO   ] harvester.sync_transactions: TURBO: 40/292 paginas | 2000/14587 docs procesados
+16:54:41 [INFO   ] harvester.sync_transactions: TURBO: 60/292 paginas | 3000/14587 docs procesados
+16:54:49 [INFO   ] harvester.sync_transactions: TURBO: 80/292 paginas | 4000/14587 docs procesados
+16:54:56 [INFO   ] harvester.sync_transactions: TURBO: 100/292 paginas | 5000/14587 docs procesados
+16:55:06 [INFO   ] harvester.sync_transactions: TURBO: 120/292 paginas | 6000/14587 docs procesados
+16:55:13 [INFO   ] harvester.sync_transactions: TURBO: 140/292 paginas | 7000/14587 docs procesados
+16:55:42 [INFO   ] harvester.sync_transactions: TURBO: 160/292 paginas | 8000/14587 docs procesados
+16:55:42 [INFO   ] harvester.sync_transactions: TURBO: 180/292 paginas | 9000/14587 docs procesados
+16:55:47 [INFO   ] harvester.sync_transactions: TURBO: 200/292 paginas | 10000/14587 docs procesados
+16:55:52 [INFO   ] harvester.sync_transactions: TURBO: 220/292 paginas | 11000/14587 docs procesados
+16:56:00 [INFO   ] harvester.sync_transactions: TURBO: 240/292 paginas | 12000/14587 docs procesados
+16:56:34 [INFO   ] harvester.sync_transactions: TURBO: 260/292 paginas | 13000/14587 docs procesados
+16:56:36 [INFO   ] harvester.sync_transactions: TURBO: 280/292 paginas | 14000/14587 docs procesados
+16:56:40 [INFO   ] harvester.sync_transactions: TURBO completado: 14588 headers, 28623 detalles insertados
+16:56:40 [INFO   ] harvester.db: Sync finalizada (log_id=9): SUCCESS | fetched=14588 inserted=14588 updated=0 skipped=0
+16:56:40 [INFO   ] harvester.main:   -> Documentos en 148.2s | {'fetched': 14588, 'inserted': 14588, 'skipped': 0, 'details_inserted': 28623}
+16:56:40 [INFO   ] harvester.main: ============================================================
+16:56:40 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 566.2 segundos (9.4 min)
+16:56:40 [INFO   ] harvester.main: ============================================================
+16:56:40 [INFO   ] harvester.db: Pool de conexiones cerrado
