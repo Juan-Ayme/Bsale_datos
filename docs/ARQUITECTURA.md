@@ -1,8 +1,8 @@
-# Kawii Pluss - Arquitectura del Sistema BI
+# GRUPO HUDEC - Arquitectura del Sistema BI
 
 ## Vision General
 
-Sistema de Business Intelligence para **Kawii Pluss** (2 tiendas + 1 almacen en Huamanga, Peru).
+Sistema de Business Intelligence para **GRUPO HUDEC** (2 tiendas + 1 almacen en Huamanga, Peru).
 Extrae datos de BSale (POS/ERP) y los carga en PostgreSQL local para analisis.
 
 ```
@@ -18,7 +18,7 @@ Extrae datos de BSale (POS/ERP) y los carga en PostgreSQL local para analisis.
 ## Estructura del Proyecto
 
 ```
-Proyecto_kawii/
+Proyecto_Grupo_Hudec/
 ├── harvester/                 # Extractor de datos BSale -> PostgreSQL
 │   ├── __init__.py
 │   ├── config.py              # Variables de entorno, constantes
@@ -90,7 +90,7 @@ PostgreSQL ──> analytics/*.py ──> validaciones ──> reportes
 
 ## Base de Datos
 
-**PostgreSQL 18** en localhost (user: postgres, db: kawii_data)
+**PostgreSQL 18** en localhost (user: postgres, db: grupo_hudec_data)
 
 ### Tablas Maestras (sync completo)
 - `offices` - 4 sucursales (2 tiendas + 1 almacen + 1 inactiva)
@@ -115,6 +115,12 @@ PostgreSQL ──> analytics/*.py ──> validaciones ──> reportes
 - `data_quality_issues` - problemas de datos detectados
 
 ## Ejecucion
+### Instalación de paquetes (primera vez)
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ### Sync Completa (primera vez)
 ```bash
@@ -138,6 +144,6 @@ python run_daily_sync.py --days 6
 import psycopg2
 conn = psycopg2.connect(
     host="localhost", port=5432,
-    dbname="kawii_data", user="postgres", password="root"
+    dbname="grupo_hudec_data", user="postgres", password="root"
 )
 ```

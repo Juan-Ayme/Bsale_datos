@@ -24,12 +24,17 @@ BSALE_MAX_RETRIES: int = 3
 BSALE_MAX_WORKERS: int = 6      # hilos concurrentes
 
 # --- PostgreSQL ---
+DB_NAME = str = os.environ["DB_NAME"]
+DB_HOST = str = os.environ["DB_HOST"]
+DB_PORT = str = os.environ["DB_PORT"]
+DB_USER = str = os.environ["DB_USER"]
+DB_PASSWORD = str = os.environ["DB_PASSWORD"]
 DB_CONFIG: dict = {
-    "host": os.getenv("DB_HOST", "localhost"),
-    "port": int(os.getenv("DB_PORT", "5432")),
-    "dbname": os.getenv("DB_NAME", "coya_data"),
-    "user": os.getenv("DB_USER", "postgres"),
-    "password": os.getenv("DB_PASSWORD", "root"),
+    "host": os.getenv("DB_HOST", DB_HOST),
+    "port": int(os.getenv("DB_PORT", DB_PORT)),
+    "dbname": os.getenv("DB_NAME", DB_NAME),
+    "user": os.getenv("DB_USER", DB_USER),
+    "password": os.getenv("DB_PASSWORD", DB_PASSWORD),
 }
 
 # --- Sucursales conocidas (para referencia rapida) ---

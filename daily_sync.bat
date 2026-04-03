@@ -1,16 +1,16 @@
 @echo off
 REM ================================================
-REM Kawii Daily Sync - Para Windows Task Scheduler
+REM GRUPO HUDEC Daily Sync - Para Windows Task Scheduler
 REM ================================================
 REM Ejecuta el sync incremental de los ultimos 6 dias.
 REM
 REM Configurar en Task Scheduler:
-REM   Programa: C:\Users\juana\Documents\analisis_datos\Proyecto_kawii\daily_sync.bat
-REM   Inicio en: C:\Users\juana\Documents\analisis_datos\Proyecto_kawii
+REM   Programa: C:\Users\juana\Documents\Prueba_Coya\Bsale_datos\daily_sync.bat
+REM   Inicio en: C:\Users\juana\Documents\Prueba_Coya\Bsale_datos
 REM   Trigger: Diario a las 06:00 AM (o la hora que prefieras)
 REM ================================================
 
-cd /d "C:\Users\juana\Documents\analisis_datos\Proyecto_kawii"
+cd /d "C:\Users\juana\Documents\Prueba_Coya\Bsale_datos"
 
 REM Activar entorno virtual si existe
 if exist "venv\Scripts\activate.bat" (

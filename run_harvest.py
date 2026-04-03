@@ -1,5 +1,5 @@
 """
-Kawii Harvester - Orquestador Principal
+GRUPO HUDEC Harvester - Orquestador Principal
 =======================================
 
 Ejecuta la sincronizacion de datos BSale -> PostgreSQL.
@@ -131,7 +131,7 @@ def run_full():
 # ============================================================
 
 def main():
-    parser = argparse.ArgumentParser(description="Kawii BSale Harvester")
+    parser = argparse.ArgumentParser(description="GRUPO HUDEC BSale Harvester")
     parser.add_argument(
         "--only",
         choices=["masters", "stock", "docs", "costs"],
@@ -143,7 +143,7 @@ def main():
     logger = logging.getLogger("harvester.main")
 
     logger.info("=" * 60)
-    logger.info("  KAWII HARVESTER - BSale -> PostgreSQL")
+    logger.info("  GRUPO HUDEC HARVESTER - BSale -> PostgreSQL")
     logger.info("  Inicio: %s", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     logger.info("=" * 60)
 

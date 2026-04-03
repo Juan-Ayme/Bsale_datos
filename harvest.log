@@ -593,3 +593,119 @@ DETAIL:  Un campo con precisión 12, escala 2 debe redondear a un valor absoluto
 16:56:40 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 566.2 segundos (9.4 min)
 16:56:40 [INFO   ] harvester.main: ============================================================
 16:56:40 [INFO   ] harvester.db: Pool de conexiones cerrado
+17:59:45 [INFO   ] harvester.main: ============================================================
+17:59:45 [INFO   ] harvester.main:   GRUPO HUDEC HARVESTER - BSale -> PostgreSQL
+17:59:45 [INFO   ] harvester.main:   Inicio: 2026-04-02 17:59:45
+17:59:45 [INFO   ] harvester.main: ============================================================
+17:59:45 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/coya_prueba)
+17:59:45 [INFO   ] harvester.main: ==================================================
+17:59:45 [INFO   ] harvester.main: SYNC: Sucursales
+17:59:45 [INFO   ] harvester.main: ==================================================
+17:59:45 [INFO   ] harvester.db: Sync iniciada: offices (log_id=1)
+17:59:47 [INFO   ] harvester.bsale_client: Paginando /offices.json: 5 registros esperados
+17:59:47 [INFO   ] harvester.bsale_client: Paginacion /offices.json completada: 5/5 items obtenidos
+17:59:47 [INFO   ] harvester.db: Sync finalizada (log_id=1): SUCCESS | fetched=5 inserted=5 updated=0 skipped=0
+17:59:47 [INFO   ] harvester.main:   -> Sucursales en 1.9s | {'fetched': 5, 'inserted': 5, 'skipped': 0}
+17:59:47 [INFO   ] harvester.main: ==================================================
+17:59:47 [INFO   ] harvester.main: SYNC: Categorias
+17:59:47 [INFO   ] harvester.main: ==================================================
+17:59:47 [INFO   ] harvester.db: Sync iniciada: product_types (log_id=2)
+17:59:48 [INFO   ] harvester.bsale_client: Paginando /product_types.json: 137 registros esperados
+17:59:49 [INFO   ] harvester.bsale_client: Paginacion /product_types.json completada: 137/137 items obtenidos
+17:59:49 [INFO   ] harvester.db: Sync finalizada (log_id=2): SUCCESS | fetched=137 inserted=137 updated=0 skipped=0
+17:59:49 [INFO   ] harvester.main:   -> Categorias en 2.2s | {'fetched': 137, 'inserted': 137, 'skipped': 0}
+17:59:49 [INFO   ] harvester.main: ==================================================
+17:59:49 [INFO   ] harvester.main: SYNC: Tipos de Documento
+17:59:49 [INFO   ] harvester.main: ==================================================
+17:59:49 [INFO   ] harvester.db: Sync iniciada: document_types (log_id=3)
+17:59:50 [INFO   ] harvester.bsale_client: Paginando /document_types.json: 11 registros esperados
+17:59:50 [INFO   ] harvester.bsale_client: Paginacion /document_types.json completada: 11/11 items obtenidos
+17:59:50 [INFO   ] harvester.db: Sync finalizada (log_id=3): SUCCESS | fetched=11 inserted=11 updated=0 skipped=0
+17:59:50 [INFO   ] harvester.main:   -> Tipos de Documento en 0.8s | {'fetched': 11, 'inserted': 11, 'skipped': 0}
+17:59:50 [INFO   ] harvester.main: ==================================================
+17:59:50 [INFO   ] harvester.main: SYNC: Productos y Variantes
+17:59:50 [INFO   ] harvester.main: ==================================================
+17:59:50 [INFO   ] harvester.db: Sync iniciada: variants (log_id=4)
+17:59:51 [INFO   ] harvester.bsale_client: Paginando /variants.json: 1329 registros esperados
+18:00:16 [INFO   ] harvester.bsale_client: Paginacion /variants.json completada: 1329/1329 items obtenidos
+18:00:16 [INFO   ] harvester.sync_masters: Products upserted: 1259
+18:00:16 [INFO   ] harvester.db: Sync finalizada (log_id=4): SUCCESS | fetched=1329 inserted=1329 updated=0 skipped=0
+18:00:16 [INFO   ] harvester.main:   -> Productos y Variantes en 26.0s | {'fetched': 1329, 'inserted': 1329, 'skipped': 0}
+18:00:16 [INFO   ] harvester.main: ==================================================
+18:00:16 [INFO   ] harvester.main: SYNC: Stock Levels
+18:00:16 [INFO   ] harvester.main: ==================================================
+18:00:16 [INFO   ] harvester.db: Sync iniciada: stock_levels (log_id=5)
+18:00:17 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 1329 registros esperados
+18:00:44 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 1329/1329 items obtenidos
+18:00:44 [INFO   ] harvester.sync_masters: Stock office 5: 1329 registros
+18:00:44 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 1329 registros esperados
+18:01:10 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 1329/1329 items obtenidos
+18:01:10 [INFO   ] harvester.sync_masters: Stock office 1: 1329 registros
+18:01:11 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 1329 registros esperados
+18:01:38 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 1329/1329 items obtenidos
+18:01:38 [INFO   ] harvester.sync_masters: Stock office 3: 1329 registros
+18:01:39 [INFO   ] harvester.db: Sync finalizada (log_id=5): SUCCESS | fetched=3987 inserted=3987 updated=0 skipped=0
+18:01:39 [INFO   ] harvester.main:   -> Stock en 82.6s | {'fetched': 3987, 'inserted': 3987, 'skipped': 0}
+18:01:39 [INFO   ] harvester.main: ==================================================
+18:01:39 [INFO   ] harvester.main: SYNC: Costos de Variantes (puede tardar ~7 min)
+18:01:39 [INFO   ] harvester.main: ==================================================
+18:01:39 [INFO   ] harvester.db: Sync iniciada: variant_costs (log_id=6)
+18:01:39 [INFO   ] harvester.sync_masters: Sincronizando costos para 1329 variantes...
+18:02:13 [INFO   ] harvester.sync_masters: Costos: 200/1329 procesados
+18:02:43 [INFO   ] harvester.sync_masters: Costos: 400/1329 procesados
+18:03:13 [INFO   ] harvester.sync_masters: Costos: 600/1329 procesados
+18:04:07 [INFO   ] harvester.sync_masters: Costos: 800/1329 procesados
+18:04:49 [INFO   ] harvester.sync_masters: Costos: 1000/1329 procesados
+18:07:26 [INFO   ] harvester.sync_masters: Costos: 1200/1329 procesados
+18:08:30 [WARNING] harvester.sync_masters: 465 variantes sin costo registrado (effective_cost=0)
+18:08:30 [INFO   ] harvester.db: Sync finalizada (log_id=6): SUCCESS | fetched=1329 inserted=1329 updated=0 skipped=0
+18:08:30 [INFO   ] harvester.main:   -> Costos en 410.9s | {'fetched': 1329, 'inserted': 1329, 'skipped': 0}
+18:08:30 [INFO   ] harvester.main: ==================================================
+18:08:30 [INFO   ] harvester.main: SYNC: Stock History (snapshot del dia)
+18:08:30 [INFO   ] harvester.main: ==================================================
+18:08:30 [INFO   ] harvester.db: Sync iniciada: stock_history (log_id=7)
+18:08:30 [INFO   ] harvester.sync_masters: Stock history: 3987 registros para 2026-04-02
+18:08:30 [INFO   ] harvester.db: Sync finalizada (log_id=7): SUCCESS | fetched=0 inserted=3987 updated=0 skipped=0
+18:08:30 [INFO   ] harvester.main:   -> Stock History en 0.1s | {'inserted': 3987}
+18:08:30 [INFO   ] harvester.main: ==================================================
+18:08:30 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+18:08:30 [INFO   ] harvester.main: ==================================================
+18:08:30 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=8)
+18:08:30 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 0/? items obtenidos
+18:08:30 [INFO   ] harvester.sync_transactions: Recepciones office 5: 0 registros
+18:08:31 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 1202 registros esperados
+18:08:59 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 1202/1202 items obtenidos
+18:08:59 [INFO   ] harvester.sync_transactions: Recepciones office 1: 1202 registros
+18:09:03 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 285 registros esperados
+18:09:08 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 285/285 items obtenidos
+18:09:08 [INFO   ] harvester.sync_transactions: Recepciones office 3: 285 registros
+18:09:16 [INFO   ] harvester.sync_transactions: Recepciones: 1487 headers, 2295 detalles
+18:09:16 [INFO   ] harvester.db: Sync finalizada (log_id=8): SUCCESS | fetched=1487 inserted=1487 updated=0 skipped=0
+18:09:16 [INFO   ] harvester.main:   -> Recepciones en 46.8s | {'fetched': 1487, 'inserted': 1487, 'skipped': 0, 'details_inserted': 2295}
+18:09:16 [INFO   ] harvester.main: ==================================================
+18:09:16 [INFO   ] harvester.main: SYNC: Documentos de Venta (~102K, puede tardar ~5 min)
+18:09:16 [INFO   ] harvester.main: ==================================================
+18:09:16 [INFO   ] harvester.db: Sync iniciada: documents (log_id=9)
+18:09:17 [INFO   ] harvester.sync_transactions: Documentos a sincronizar: 14605
+18:09:17 [INFO   ] harvester.sync_transactions: TURBO: 293 paginas pre-computadas, 6 workers
+18:09:27 [INFO   ] harvester.sync_transactions: TURBO: 20/293 paginas | 1000/14605 docs procesados
+18:09:35 [INFO   ] harvester.sync_transactions: TURBO: 40/293 paginas | 2000/14605 docs procesados
+18:09:42 [INFO   ] harvester.sync_transactions: TURBO: 60/293 paginas | 3000/14605 docs procesados
+18:09:50 [INFO   ] harvester.sync_transactions: TURBO: 80/293 paginas | 4000/14605 docs procesados
+18:09:56 [INFO   ] harvester.sync_transactions: TURBO: 100/293 paginas | 5000/14605 docs procesados
+18:10:06 [INFO   ] harvester.sync_transactions: TURBO: 120/293 paginas | 6000/14605 docs procesados
+18:10:13 [INFO   ] harvester.sync_transactions: TURBO: 140/293 paginas | 7000/14605 docs procesados
+18:10:21 [INFO   ] harvester.sync_transactions: TURBO: 160/293 paginas | 8000/14605 docs procesados
+18:10:28 [INFO   ] harvester.sync_transactions: TURBO: 180/293 paginas | 9000/14605 docs procesados
+18:10:35 [INFO   ] harvester.sync_transactions: TURBO: 200/293 paginas | 10000/14605 docs procesados
+18:10:42 [INFO   ] harvester.sync_transactions: TURBO: 220/293 paginas | 11000/14605 docs procesados
+18:10:50 [INFO   ] harvester.sync_transactions: TURBO: 240/293 paginas | 12000/14605 docs procesados
+18:10:56 [INFO   ] harvester.sync_transactions: TURBO: 260/293 paginas | 13000/14605 docs procesados
+18:11:05 [INFO   ] harvester.sync_transactions: TURBO: 280/293 paginas | 14000/14605 docs procesados
+18:11:10 [INFO   ] harvester.sync_transactions: TURBO completado: 14607 headers, 28658 detalles insertados
+18:11:10 [INFO   ] harvester.db: Sync finalizada (log_id=9): SUCCESS | fetched=14607 inserted=14607 updated=0 skipped=0
+18:11:10 [INFO   ] harvester.main:   -> Documentos en 113.9s | {'fetched': 14607, 'inserted': 14607, 'skipped': 0, 'details_inserted': 28658}
+18:11:10 [INFO   ] harvester.main: ============================================================
+18:11:10 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 685.2 segundos (11.4 min)
+18:11:10 [INFO   ] harvester.main: ============================================================
+18:11:10 [INFO   ] harvester.db: Pool de conexiones cerrado

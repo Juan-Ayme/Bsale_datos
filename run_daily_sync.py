@@ -1,5 +1,5 @@
 """
-Kawii Daily Sync - Actualizacion incremental diaria
+GRUPO HUDEC Daily Sync - Actualizacion incremental diaria
 ====================================================
 
 Sincroniza los ultimos N dias de datos desde BSale -> PostgreSQL.
@@ -54,7 +54,7 @@ def setup_logging():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Kawii Daily Sync (incremental)")
+    parser = argparse.ArgumentParser(description="GRUPO HUDEC Daily Sync (incremental)")
     parser.add_argument(
         "--days", type=int, default=6,
         help="Cuantos dias hacia atras sincronizar (default: 6)",
@@ -70,7 +70,7 @@ def main():
     since_unix = int(since_dt.timestamp())
 
     logger.info("=" * 60)
-    logger.info("  KAWII DAILY SYNC - Incremental %d dias", args.days)
+    logger.info("  GRUPO HUDEC DAILY SYNC - Incremental %d dias", args.days)
     logger.info("  Desde: %s (unix: %d)", since_dt.strftime("%Y-%m-%d"), since_unix)
     logger.info("  Inicio: %s", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     logger.info("=" * 60)

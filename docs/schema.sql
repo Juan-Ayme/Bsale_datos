@@ -1,5 +1,5 @@
 -- ============================================================
--- KAWII HARVESTER - Schema PostgreSQL
+-- GRUPO HUDEC - Schema PostgreSQL
 -- Diseñado desde auditoria real de API BSale (2026-03-30)
 -- ============================================================
 
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS offices (
     synced_at         TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-COMMENT ON TABLE offices IS 'Sucursales/almacenes de Kawii. Source: GET /v1/offices.json';
+COMMENT ON TABLE offices IS 'Sucursales/almacenes de GRUPO HUDEC. Source: GET /v1/offices.json';
 COMMENT ON COLUMN offices.is_active IS 'BSale state=0 -> activo=true';
 
 -- ============================================================

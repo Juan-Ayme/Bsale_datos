@@ -1,4 +1,4 @@
-# Auditoria API BSale - Kawii Pluss
+# Auditoria API BSale - GRUPO HUDEC
 > Fecha de auditoria: 2026-03-30
 > Cuenta BSale: 108837 (bsale.com.pe)
 > Volumenes: ~3,375 variantes | ~102,072 documentos | 4 sucursales | ~5,379 recepciones

@@ -1,8 +1,8 @@
 """
-Kawii Analytics - Modulo de KPIs y Reportes
+GRUPO HUDEC Analytics - Modulo de KPIs y Reportes
 ============================================
 
-Funciones de analisis para Kawii Pluss:
+Funciones de analisis para GRUPO HUDEC:
   - rentabilidad: Margen bruto, utilidad por producto/categoria
   - inventario: Rotacion, dias de inventario, sobrestock
   - comercial: Ticket promedio, cumplimiento de meta, comparacion de tiendas
