@@ -709,3 +709,288 @@ DETAIL:  Un campo con precisión 12, escala 2 debe redondear a un valor absoluto
 18:11:10 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 685.2 segundos (11.4 min)
 18:11:10 [INFO   ] harvester.main: ============================================================
 18:11:10 [INFO   ] harvester.db: Pool de conexiones cerrado
+10:58:34 [INFO   ] harvester.main: ============================================================
+10:58:34 [INFO   ] harvester.main:   GRUPO HUDEC HARVESTER - BSale -> PostgreSQL
+10:58:34 [INFO   ] harvester.main:   Inicio: 2026-04-03 10:58:34
+10:58:34 [INFO   ] harvester.main: ============================================================
+10:58:34 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/database_kawii)
+10:58:34 [INFO   ] harvester.main: ==================================================
+10:58:34 [INFO   ] harvester.main: SYNC: Sucursales
+10:58:34 [INFO   ] harvester.main: ==================================================
+10:58:34 [ERROR  ] harvester.main: Error fatal en harvester: no existe la relación «sync_log»
+LINE 1: INSERT INTO sync_log (entity, status, params)
+                    ^
+Traceback (most recent call last):
+  File "C:\Users\juana\Documents\Kawii_analisis_datos\Bsale_datos\run_harvest.py", line 166, in main
+    run_full()
+    ~~~~~~~~^^
+  File "C:\Users\juana\Documents\Kawii_analisis_datos\Bsale_datos\run_harvest.py", line 124, in run_full
+    run_masters()
+    ~~~~~~~~~~~^^
+  File "C:\Users\juana\Documents\Kawii_analisis_datos\Bsale_datos\run_harvest.py", line 72, in run_masters
+    result = func()
+  File "C:\Users\juana\Documents\Kawii_analisis_datos\Bsale_datos\harvester\sync_masters.py", line 54, in sync_offices
+    log_id = db.sync_start("offices")
+  File "C:\Users\juana\Documents\Kawii_analisis_datos\Bsale_datos\harvester\db.py", line 90, in sync_start
+    cur.execute(
+    ~~~~~~~~~~~^
+        """INSERT INTO sync_log (entity, status, params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           VALUES (%s, 'RUNNING', %s) RETURNING id""",
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (entity, psycopg2.extras.Json(params)),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+psycopg2.errors.UndefinedTable: no existe la relación «sync_log»
+LINE 1: INSERT INTO sync_log (entity, status, params)
+                    ^
+
+10:58:34 [INFO   ] harvester.db: Pool de conexiones cerrado
+10:59:45 [INFO   ] harvester.main: ============================================================
+10:59:45 [INFO   ] harvester.main:   GRUPO HUDEC HARVESTER - BSale -> PostgreSQL
+10:59:45 [INFO   ] harvester.main:   Inicio: 2026-04-03 10:59:45
+10:59:45 [INFO   ] harvester.main: ============================================================
+10:59:45 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/database_kawii)
+10:59:45 [INFO   ] harvester.main: ==================================================
+10:59:45 [INFO   ] harvester.main: SYNC: Sucursales
+10:59:45 [INFO   ] harvester.main: ==================================================
+10:59:45 [INFO   ] harvester.db: Sync iniciada: offices (log_id=1)
+10:59:45 [INFO   ] harvester.bsale_client: Paginando /offices.json: 4 registros esperados
+10:59:45 [INFO   ] harvester.bsale_client: Paginacion /offices.json completada: 4/4 items obtenidos
+10:59:45 [INFO   ] harvester.db: Sync finalizada (log_id=1): SUCCESS | fetched=4 inserted=4 updated=0 skipped=0
+10:59:45 [INFO   ] harvester.main:   -> Sucursales en 0.8s | {'fetched': 4, 'inserted': 4, 'skipped': 0}
+10:59:45 [INFO   ] harvester.main: ==================================================
+10:59:45 [INFO   ] harvester.main: SYNC: Categorias
+10:59:45 [INFO   ] harvester.main: ==================================================
+10:59:45 [INFO   ] harvester.db: Sync iniciada: product_types (log_id=2)
+10:59:46 [INFO   ] harvester.bsale_client: Paginando /product_types.json: 246 registros esperados
+10:59:49 [INFO   ] harvester.bsale_client: Paginacion /product_types.json completada: 246/246 items obtenidos
+10:59:49 [INFO   ] harvester.db: Sync finalizada (log_id=2): SUCCESS | fetched=246 inserted=246 updated=0 skipped=0
+10:59:49 [INFO   ] harvester.main:   -> Categorias en 3.7s | {'fetched': 246, 'inserted': 246, 'skipped': 0}
+10:59:49 [INFO   ] harvester.main: ==================================================
+10:59:49 [INFO   ] harvester.main: SYNC: Tipos de Documento
+10:59:49 [INFO   ] harvester.main: ==================================================
+10:59:49 [INFO   ] harvester.db: Sync iniciada: document_types (log_id=3)
+10:59:50 [INFO   ] harvester.bsale_client: Paginando /document_types.json: 11 registros esperados
+10:59:50 [INFO   ] harvester.bsale_client: Paginacion /document_types.json completada: 11/11 items obtenidos
+10:59:50 [INFO   ] harvester.db: Sync finalizada (log_id=3): SUCCESS | fetched=11 inserted=11 updated=0 skipped=0
+10:59:50 [INFO   ] harvester.main:   -> Tipos de Documento en 0.9s | {'fetched': 11, 'inserted': 11, 'skipped': 0}
+10:59:50 [INFO   ] harvester.main: ==================================================
+10:59:50 [INFO   ] harvester.main: SYNC: Productos y Variantes
+10:59:50 [INFO   ] harvester.main: ==================================================
+10:59:50 [INFO   ] harvester.db: Sync iniciada: variants (log_id=4)
+10:59:51 [INFO   ] harvester.bsale_client: Paginando /variants.json: 3383 registros esperados
+11:00:54 [INFO   ] harvester.bsale_client: Paginacion /variants.json completada: 3383/3383 items obtenidos
+11:00:54 [WARNING] harvester.sync_masters: Encontradas 1 categorias huerfanas (eliminadas en BSale): {95}
+11:00:56 [INFO   ] harvester.sync_masters: Categorias huerfanas resueltas: 1
+11:00:56 [INFO   ] harvester.sync_masters: Products upserted: 3100
+11:00:56 [INFO   ] harvester.db: Sync finalizada (log_id=4): SUCCESS | fetched=3383 inserted=3383 updated=0 skipped=0
+11:00:56 [INFO   ] harvester.main:   -> Productos y Variantes en 66.2s | {'fetched': 3383, 'inserted': 3383, 'skipped': 0}
+11:00:56 [INFO   ] harvester.main: ==================================================
+11:00:56 [INFO   ] harvester.main: SYNC: Stock Levels
+11:00:56 [INFO   ] harvester.main: ==================================================
+11:00:56 [INFO   ] harvester.db: Sync iniciada: stock_levels (log_id=5)
+11:00:57 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 3376 registros esperados
+11:02:06 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 3376/3376 items obtenidos
+11:02:06 [INFO   ] harvester.sync_masters: Stock office 4: 3376 registros
+11:02:07 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 3377 registros esperados
+11:03:12 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 3377/3377 items obtenidos
+11:03:12 [INFO   ] harvester.sync_masters: Stock office 3: 3377 registros
+11:03:13 [INFO   ] harvester.bsale_client: Paginando /stocks.json: 3377 registros esperados
+11:04:19 [INFO   ] harvester.bsale_client: Paginacion /stocks.json completada: 3377/3377 items obtenidos
+11:04:19 [INFO   ] harvester.sync_masters: Stock office 1: 3377 registros
+11:04:20 [INFO   ] harvester.db: Sync finalizada (log_id=5): SUCCESS | fetched=10130 inserted=10130 updated=0 skipped=0
+11:04:20 [INFO   ] harvester.main:   -> Stock en 203.8s | {'fetched': 10130, 'inserted': 10130, 'skipped': 0}
+11:04:20 [INFO   ] harvester.main: ==================================================
+11:04:20 [INFO   ] harvester.main: SYNC: Costos de Variantes (puede tardar ~7 min)
+11:04:20 [INFO   ] harvester.main: ==================================================
+11:04:20 [INFO   ] harvester.db: Sync iniciada: variant_costs (log_id=6)
+11:04:20 [INFO   ] harvester.sync_masters: Sincronizando costos para 3383 variantes...
+11:04:54 [INFO   ] harvester.sync_masters: Costos: 200/3383 procesados
+11:05:29 [INFO   ] harvester.sync_masters: Costos: 400/3383 procesados
+11:06:02 [INFO   ] harvester.sync_masters: Costos: 600/3383 procesados
+11:06:35 [INFO   ] harvester.sync_masters: Costos: 800/3383 procesados
+11:07:09 [INFO   ] harvester.sync_masters: Costos: 1000/3383 procesados
+11:07:54 [INFO   ] harvester.sync_masters: Costos: 1200/3383 procesados
+11:08:31 [INFO   ] harvester.sync_masters: Costos: 1400/3383 procesados
+11:09:04 [INFO   ] harvester.sync_masters: Costos: 1600/3383 procesados
+11:09:37 [INFO   ] harvester.sync_masters: Costos: 1800/3383 procesados
+11:10:11 [INFO   ] harvester.sync_masters: Costos: 2000/3383 procesados
+11:10:46 [INFO   ] harvester.sync_masters: Costos: 2200/3383 procesados
+11:12:33 [INFO   ] harvester.sync_masters: Costos: 2400/3383 procesados
+11:14:41 [INFO   ] harvester.sync_masters: Costos: 2600/3383 procesados
+11:15:15 [INFO   ] harvester.sync_masters: Costos: 2800/3383 procesados
+11:15:56 [INFO   ] harvester.sync_masters: Costos: 3000/3383 procesados
+11:16:29 [INFO   ] harvester.sync_masters: Costos: 3200/3383 procesados
+11:17:00 [WARNING] harvester.sync_masters: 2873 variantes sin costo registrado (effective_cost=0)
+11:17:00 [INFO   ] harvester.db: Sync finalizada (log_id=6): SUCCESS | fetched=3383 inserted=3383 updated=0 skipped=0
+11:17:00 [INFO   ] harvester.main:   -> Costos en 759.6s | {'fetched': 3383, 'inserted': 3383, 'skipped': 0}
+11:17:00 [INFO   ] harvester.main: ==================================================
+11:17:00 [INFO   ] harvester.main: SYNC: Stock History (snapshot del dia)
+11:17:00 [INFO   ] harvester.main: ==================================================
+11:17:00 [INFO   ] harvester.db: Sync iniciada: stock_history (log_id=7)
+11:17:00 [INFO   ] harvester.sync_masters: Stock history: 10130 registros para 2026-04-03
+11:17:00 [INFO   ] harvester.db: Sync finalizada (log_id=7): SUCCESS | fetched=0 inserted=10130 updated=0 skipped=0
+11:17:00 [INFO   ] harvester.main:   -> Stock History en 0.3s | {'inserted': 10130}
+11:17:00 [INFO   ] harvester.main: ==================================================
+11:17:00 [INFO   ] harvester.main: SYNC: Recepciones de Stock
+11:17:00 [INFO   ] harvester.main: ==================================================
+11:17:00 [INFO   ] harvester.db: Sync iniciada: receptions (log_id=8)
+11:17:03 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 563 registros esperados
+11:17:14 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 563/563 items obtenidos
+11:17:14 [INFO   ] harvester.sync_transactions: Recepciones office 4: 563 registros
+11:17:15 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 2395 registros esperados
+11:18:04 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 2395/2395 items obtenidos
+11:18:04 [INFO   ] harvester.sync_transactions: Recepciones office 3: 2395 registros
+11:18:55 [INFO   ] harvester.bsale_client: Paginando /stocks/receptions.json: 5592 registros esperados
+11:20:50 [INFO   ] harvester.bsale_client: Paginacion /stocks/receptions.json completada: 5592/5592 items obtenidos
+11:20:50 [INFO   ] harvester.sync_transactions: Recepciones office 1: 5592 registros
+11:21:26 [INFO   ] harvester.sync_transactions: Recepciones: 8550 headers, 15030 detalles
+11:21:26 [INFO   ] harvester.db: Sync finalizada (log_id=8): SUCCESS | fetched=8550 inserted=8550 updated=0 skipped=0
+11:21:26 [INFO   ] harvester.main:   -> Recepciones en 266.2s | {'fetched': 8550, 'inserted': 8550, 'skipped': 0, 'details_inserted': 15030}
+11:21:26 [INFO   ] harvester.main: ==================================================
+11:21:26 [INFO   ] harvester.main: SYNC: Documentos de Venta (~102K, puede tardar ~5 min)
+11:21:26 [INFO   ] harvester.main: ==================================================
+11:21:26 [INFO   ] harvester.db: Sync iniciada: documents (log_id=9)
+11:21:27 [INFO   ] harvester.sync_transactions: Documentos a sincronizar: 103414
+11:21:27 [INFO   ] harvester.sync_transactions: TURBO: 2069 paginas pre-computadas, 6 workers
+11:21:42 [INFO   ] harvester.sync_transactions: TURBO: 20/2069 paginas | 1000/103414 docs procesados
+11:21:54 [INFO   ] harvester.sync_transactions: TURBO: 40/2069 paginas | 2000/103414 docs procesados
+11:22:03 [INFO   ] harvester.sync_transactions: TURBO: 60/2069 paginas | 3000/103414 docs procesados
+11:22:19 [INFO   ] harvester.sync_transactions: TURBO: 80/2069 paginas | 4000/103414 docs procesados
+11:22:30 [INFO   ] harvester.sync_transactions: TURBO: 100/2069 paginas | 5000/103414 docs procesados
+11:22:43 [INFO   ] harvester.sync_transactions: TURBO: 120/2069 paginas | 6000/103414 docs procesados
+11:22:49 [INFO   ] harvester.sync_transactions: TURBO: 140/2069 paginas | 7000/103414 docs procesados
+11:22:59 [INFO   ] harvester.sync_transactions: TURBO: 160/2069 paginas | 8000/103414 docs procesados
+11:23:07 [INFO   ] harvester.sync_transactions: TURBO: 180/2069 paginas | 9000/103414 docs procesados
+11:23:17 [INFO   ] harvester.sync_transactions: TURBO: 200/2069 paginas | 10000/103414 docs procesados
+11:23:25 [INFO   ] harvester.sync_transactions: TURBO: 220/2069 paginas | 11000/103414 docs procesados
+11:23:35 [INFO   ] harvester.sync_transactions: TURBO: 240/2069 paginas | 12000/103414 docs procesados
+11:23:44 [INFO   ] harvester.sync_transactions: TURBO: 260/2069 paginas | 13000/103414 docs procesados
+11:23:53 [INFO   ] harvester.sync_transactions: TURBO: 280/2069 paginas | 14000/103414 docs procesados
+11:24:00 [INFO   ] harvester.sync_transactions: TURBO: 300/2069 paginas | 15000/103414 docs procesados
+11:24:11 [INFO   ] harvester.sync_transactions: TURBO: 320/2069 paginas | 16000/103414 docs procesados
+11:24:20 [INFO   ] harvester.sync_transactions: TURBO: 340/2069 paginas | 17000/103414 docs procesados
+11:24:30 [INFO   ] harvester.sync_transactions: TURBO: 360/2069 paginas | 18000/103414 docs procesados
+11:24:36 [INFO   ] harvester.sync_transactions: TURBO: 380/2069 paginas | 19000/103414 docs procesados
+11:24:46 [INFO   ] harvester.sync_transactions: TURBO: 400/2069 paginas | 20000/103414 docs procesados
+11:24:55 [INFO   ] harvester.sync_transactions: TURBO: 420/2069 paginas | 21000/103414 docs procesados
+11:25:06 [INFO   ] harvester.sync_transactions: TURBO: 440/2069 paginas | 22000/103414 docs procesados
+11:25:13 [INFO   ] harvester.sync_transactions: TURBO: 460/2069 paginas | 23000/103414 docs procesados
+11:25:24 [INFO   ] harvester.sync_transactions: TURBO: 480/2069 paginas | 24000/103414 docs procesados
+11:25:31 [INFO   ] harvester.sync_transactions: TURBO: 500/2069 paginas | 25000/103414 docs procesados
+11:25:42 [INFO   ] harvester.sync_transactions: TURBO: 520/2069 paginas | 26000/103414 docs procesados
+11:25:49 [INFO   ] harvester.sync_transactions: TURBO: 540/2069 paginas | 27000/103414 docs procesados
+11:25:59 [INFO   ] harvester.sync_transactions: TURBO: 560/2069 paginas | 28000/103414 docs procesados
+11:26:07 [INFO   ] harvester.sync_transactions: TURBO: 580/2069 paginas | 29000/103414 docs procesados
+11:26:17 [INFO   ] harvester.sync_transactions: TURBO: 600/2069 paginas | 30000/103414 docs procesados
+11:26:25 [INFO   ] harvester.sync_transactions: TURBO: 620/2069 paginas | 31000/103414 docs procesados
+11:26:33 [INFO   ] harvester.sync_transactions: TURBO: 640/2069 paginas | 32000/103414 docs procesados
+11:26:42 [INFO   ] harvester.sync_transactions: TURBO: 660/2069 paginas | 33000/103414 docs procesados
+11:26:50 [INFO   ] harvester.sync_transactions: TURBO: 680/2069 paginas | 34000/103414 docs procesados
+11:27:10 [INFO   ] harvester.sync_transactions: TURBO: 700/2069 paginas | 35000/103414 docs procesados
+11:27:27 [INFO   ] harvester.sync_transactions: TURBO: 720/2069 paginas | 36000/103414 docs procesados
+11:27:36 [INFO   ] harvester.sync_transactions: TURBO: 740/2069 paginas | 37000/103414 docs procesados
+11:28:27 [INFO   ] harvester.sync_transactions: TURBO: 760/2069 paginas | 38000/103414 docs procesados
+11:29:06 [INFO   ] harvester.sync_transactions: TURBO: 780/2069 paginas | 39000/103414 docs procesados
+11:29:06 [INFO   ] harvester.sync_transactions: TURBO: 800/2069 paginas | 40000/103414 docs procesados
+11:29:46 [INFO   ] harvester.sync_transactions: TURBO: 820/2069 paginas | 41000/103414 docs procesados
+11:30:22 [INFO   ] harvester.sync_transactions: TURBO: 840/2069 paginas | 42000/103414 docs procesados
+11:30:34 [INFO   ] harvester.sync_transactions: TURBO: 860/2069 paginas | 43000/103414 docs procesados
+11:30:42 [INFO   ] harvester.sync_transactions: TURBO: 880/2069 paginas | 44000/103414 docs procesados
+11:30:49 [INFO   ] harvester.sync_transactions: TURBO: 900/2069 paginas | 45000/103414 docs procesados
+11:30:59 [INFO   ] harvester.sync_transactions: TURBO: 920/2069 paginas | 46000/103414 docs procesados
+11:31:09 [INFO   ] harvester.sync_transactions: TURBO: 940/2069 paginas | 47000/103414 docs procesados
+11:31:19 [INFO   ] harvester.sync_transactions: TURBO: 960/2069 paginas | 48000/103414 docs procesados
+11:31:26 [INFO   ] harvester.sync_transactions: TURBO: 980/2069 paginas | 49000/103414 docs procesados
+11:31:37 [INFO   ] harvester.sync_transactions: TURBO: 1000/2069 paginas | 50000/103414 docs procesados
+11:31:45 [INFO   ] harvester.sync_transactions: TURBO: 1020/2069 paginas | 51000/103414 docs procesados
+11:31:54 [INFO   ] harvester.sync_transactions: TURBO: 1040/2069 paginas | 52000/103414 docs procesados
+11:32:03 [INFO   ] harvester.sync_transactions: TURBO: 1060/2069 paginas | 53000/103414 docs procesados
+11:32:12 [INFO   ] harvester.sync_transactions: TURBO: 1080/2069 paginas | 54000/103414 docs procesados
+11:32:20 [INFO   ] harvester.sync_transactions: TURBO: 1100/2069 paginas | 55000/103414 docs procesados
+11:32:28 [INFO   ] harvester.sync_transactions: TURBO: 1120/2069 paginas | 56000/103414 docs procesados
+11:32:37 [INFO   ] harvester.sync_transactions: TURBO: 1140/2069 paginas | 57000/103414 docs procesados
+11:32:45 [INFO   ] harvester.sync_transactions: TURBO: 1160/2069 paginas | 58000/103414 docs procesados
+11:32:52 [INFO   ] harvester.sync_transactions: TURBO: 1180/2069 paginas | 59000/103414 docs procesados
+11:33:03 [INFO   ] harvester.sync_transactions: TURBO: 1200/2069 paginas | 60000/103414 docs procesados
+11:33:11 [INFO   ] harvester.sync_transactions: TURBO: 1220/2069 paginas | 61000/103414 docs procesados
+11:33:20 [INFO   ] harvester.sync_transactions: TURBO: 1240/2069 paginas | 62000/103414 docs procesados
+11:33:28 [INFO   ] harvester.sync_transactions: TURBO: 1260/2069 paginas | 63000/103414 docs procesados
+11:33:37 [INFO   ] harvester.sync_transactions: TURBO: 1280/2069 paginas | 64000/103414 docs procesados
+11:33:43 [INFO   ] harvester.sync_transactions: TURBO: 1300/2069 paginas | 65000/103414 docs procesados
+11:33:54 [INFO   ] harvester.sync_transactions: TURBO: 1320/2069 paginas | 66000/103414 docs procesados
+11:34:03 [INFO   ] harvester.sync_transactions: TURBO: 1340/2069 paginas | 67000/103414 docs procesados
+11:34:12 [INFO   ] harvester.sync_transactions: TURBO: 1360/2069 paginas | 68000/103414 docs procesados
+11:34:21 [INFO   ] harvester.sync_transactions: TURBO: 1380/2069 paginas | 69000/103414 docs procesados
+11:34:29 [INFO   ] harvester.sync_transactions: TURBO: 1400/2069 paginas | 70000/103414 docs procesados
+11:34:37 [INFO   ] harvester.sync_transactions: TURBO: 1420/2069 paginas | 71000/103414 docs procesados
+11:34:47 [INFO   ] harvester.sync_transactions: TURBO: 1440/2069 paginas | 72000/103414 docs procesados
+11:34:55 [INFO   ] harvester.sync_transactions: TURBO: 1460/2069 paginas | 73000/103414 docs procesados
+11:35:04 [INFO   ] harvester.sync_transactions: TURBO: 1480/2069 paginas | 74000/103414 docs procesados
+11:35:13 [INFO   ] harvester.sync_transactions: TURBO: 1500/2069 paginas | 75000/103414 docs procesados
+11:35:23 [INFO   ] harvester.sync_transactions: TURBO: 1520/2069 paginas | 76000/103414 docs procesados
+11:35:30 [INFO   ] harvester.sync_transactions: TURBO: 1540/2069 paginas | 77000/103414 docs procesados
+11:35:39 [INFO   ] harvester.sync_transactions: TURBO: 1560/2069 paginas | 78000/103414 docs procesados
+11:35:47 [INFO   ] harvester.sync_transactions: TURBO: 1580/2069 paginas | 79000/103414 docs procesados
+11:35:57 [INFO   ] harvester.sync_transactions: TURBO: 1600/2069 paginas | 80000/103414 docs procesados
+11:36:05 [INFO   ] harvester.sync_transactions: TURBO: 1620/2069 paginas | 81000/103414 docs procesados
+11:36:15 [INFO   ] harvester.sync_transactions: TURBO: 1640/2069 paginas | 82000/103414 docs procesados
+11:36:22 [INFO   ] harvester.sync_transactions: TURBO: 1660/2069 paginas | 83000/103414 docs procesados
+11:36:32 [INFO   ] harvester.sync_transactions: TURBO: 1680/2069 paginas | 84000/103414 docs procesados
+11:36:40 [INFO   ] harvester.sync_transactions: TURBO: 1700/2069 paginas | 85000/103414 docs procesados
+11:36:52 [INFO   ] harvester.sync_transactions: TURBO: 1720/2069 paginas | 86000/103414 docs procesados
+11:37:00 [INFO   ] harvester.sync_transactions: TURBO: 1740/2069 paginas | 87000/103414 docs procesados
+11:37:12 [INFO   ] harvester.sync_transactions: TURBO: 1760/2069 paginas | 88000/103414 docs procesados
+11:37:23 [INFO   ] harvester.sync_transactions: TURBO: 1780/2069 paginas | 89000/103414 docs procesados
+11:37:33 [INFO   ] harvester.sync_transactions: TURBO: 1800/2069 paginas | 90000/103414 docs procesados
+11:37:43 [INFO   ] harvester.sync_transactions: TURBO: 1820/2069 paginas | 91000/103414 docs procesados
+11:37:55 [INFO   ] harvester.sync_transactions: TURBO: 1840/2069 paginas | 92000/103414 docs procesados
+11:38:09 [INFO   ] harvester.sync_transactions: TURBO: 1860/2069 paginas | 93000/103414 docs procesados
+11:38:22 [INFO   ] harvester.sync_transactions: TURBO: 1880/2069 paginas | 94000/103414 docs procesados
+11:38:34 [INFO   ] harvester.sync_transactions: TURBO: 1900/2069 paginas | 95000/103414 docs procesados
+11:38:47 [INFO   ] harvester.sync_transactions: TURBO: 1920/2069 paginas | 96000/103414 docs procesados
+11:38:58 [INFO   ] harvester.sync_transactions: TURBO: 1940/2069 paginas | 97000/103414 docs procesados
+11:39:17 [INFO   ] harvester.sync_transactions: TURBO: 1960/2069 paginas | 98000/103414 docs procesados
+11:39:29 [INFO   ] harvester.sync_transactions: TURBO: 1980/2069 paginas | 99000/103414 docs procesados
+11:39:41 [INFO   ] harvester.sync_transactions: TURBO: 2000/2069 paginas | 100000/103414 docs procesados
+11:39:51 [INFO   ] harvester.sync_transactions: TURBO: 2020/2069 paginas | 101000/103414 docs procesados
+11:40:03 [INFO   ] harvester.sync_transactions: TURBO: 2040/2069 paginas | 102000/103414 docs procesados
+11:40:13 [INFO   ] harvester.sync_transactions: TURBO: 2060/2069 paginas | 103000/103414 docs procesados
+11:40:16 [INFO   ] harvester.sync_transactions: TURBO completado: 103420 headers, 312941 detalles insertados
+11:40:16 [INFO   ] harvester.db: Sync finalizada (log_id=9): SUCCESS | fetched=103420 inserted=103420 updated=0 skipped=0
+11:40:16 [INFO   ] harvester.main:   -> Documentos en 1130.1s | {'fetched': 103420, 'inserted': 103420, 'skipped': 0, 'details_inserted': 312941}
+11:40:16 [INFO   ] harvester.main: ============================================================
+11:40:16 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 2431.6 segundos (40.5 min)
+11:40:16 [INFO   ] harvester.main: ============================================================
+11:40:16 [INFO   ] harvester.db: Pool de conexiones cerrado
+16:01:53 [INFO   ] harvester.main: ============================================================
+16:01:53 [INFO   ] harvester.main:   GRUPO HUDEC HARVESTER - BSale -> PostgreSQL
+16:01:53 [INFO   ] harvester.main:   Inicio: 2026-04-03 16:01:53
+16:01:53 [INFO   ] harvester.main: ============================================================
+16:01:53 [INFO   ] harvester.db: Pool de conexiones inicializado (localhost:5432/database_kawii)
+16:01:53 [INFO   ] harvester.main: SYNC: Solo atributos
+16:01:53 [INFO   ] harvester.db: Sync iniciada: product_type_attributes (log_id=19)
+16:01:53 [INFO   ] harvester.sync_masters: Sincronizando atributos para 248 categorias...
+16:02:02 [INFO   ] harvester.sync_masters: Atributos: 50/248 categorias procesadas
+16:02:09 [INFO   ] harvester.sync_masters: Atributos: 100/248 categorias procesadas
+16:02:16 [INFO   ] harvester.sync_masters: Atributos: 150/248 categorias procesadas
+16:02:23 [INFO   ] harvester.sync_masters: Atributos: 200/248 categorias procesadas
+16:02:31 [INFO   ] harvester.sync_masters: 247 categorias sin atributos (es normal)
+16:02:31 [INFO   ] harvester.db: Sync finalizada (log_id=19): SUCCESS | fetched=1 inserted=1 updated=0 skipped=0
+16:02:31 [INFO   ] harvester.db: Sync iniciada: variant_attribute_values (log_id=20)
+16:02:31 [INFO   ] harvester.sync_masters: Sincronizando attribute_values para 3384 variantes activas...
+16:03:46 [INFO   ] harvester.sync_masters: AttributeValues: 500/3384 variantes procesadas
+16:05:02 [INFO   ] harvester.sync_masters: AttributeValues: 1000/3384 variantes procesadas
+16:06:17 [INFO   ] harvester.sync_masters: AttributeValues: 1500/3384 variantes procesadas
+16:07:33 [INFO   ] harvester.sync_masters: AttributeValues: 2000/3384 variantes procesadas
+16:08:30 [ERROR  ] harvester.bsale_client: Error de red en https://api.bsale.io/v1/variants/2285/attribute_values.json?limit=25&offset=0: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+16:10:37 [INFO   ] harvester.sync_masters: AttributeValues: 2500/3384 variantes procesadas
+16:13:09 [INFO   ] harvester.sync_masters: AttributeValues: 3000/3384 variantes procesadas
+16:14:17 [INFO   ] harvester.sync_masters: 1 variantes tienen al menos un atributo (de 3384 totales)
+16:14:17 [INFO   ] harvester.db: Sync finalizada (log_id=20): SUCCESS | fetched=1 inserted=1 updated=0 skipped=0
+16:14:17 [INFO   ] harvester.main: ============================================================
+16:14:17 [INFO   ] harvester.main:   HARVESTER COMPLETADO en 743.6 segundos (12.4 min)
+16:14:17 [INFO   ] harvester.main: ============================================================
+16:14:17 [INFO   ] harvester.db: Pool de conexiones cerrado

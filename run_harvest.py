@@ -26,6 +26,8 @@ from harvester.sync_masters import (
     sync_variant_costs,
     sync_stock_levels,
     snapshot_stock_history,
+    sync_product_type_attributes,
+    sync_variant_attribute_values,
 )
 from harvester.sync_transactions import sync_documents, sync_receptions
 
@@ -62,6 +64,8 @@ def run_masters():
         ("Categorias", sync_product_types),
         ("Tipos de Documento", sync_document_types),
         ("Productos y Variantes", sync_variants),
+        ("Atributos de Categoria", sync_product_type_attributes),
+        ("Valores de Atributo por Variante", sync_variant_attribute_values),
     ]
 
     for name, func in steps:
@@ -134,7 +138,7 @@ def main():
     parser = argparse.ArgumentParser(description="GRUPO HUDEC BSale Harvester")
     parser.add_argument(
         "--only",
-        choices=["masters", "stock", "docs", "costs"],
+        choices=["masters", "stock", "docs", "costs", "attributes"],
         help="Ejecutar solo una fase especifica",
     )
     args = parser.parse_args()
@@ -162,6 +166,10 @@ def main():
         elif args.only == "costs":
             logger.info("SYNC: Solo costos")
             sync_variant_costs()
+        elif args.only == "attributes":
+            logger.info("SYNC: Solo atributos")
+            sync_product_type_attributes()
+            sync_variant_attribute_values()
         else:
             run_full()
 

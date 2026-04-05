@@ -285,3 +285,39 @@ CREATE TABLE IF NOT EXISTS data_quality_issues (
 COMMENT ON TABLE data_quality_issues IS 'Registro de problemas de calidad detectados durante sync';
 
 CREATE INDEX IF NOT EXISTS idx_dqi_entity ON data_quality_issues(entity, resolved);
+
+-- ============================================================
+-- ATRIBUTOS DE CATEGORIA (definicion de tipos de etiqueta)
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS product_type_attributes (
+    bsale_attribute_id      INTEGER PRIMARY KEY,
+    bsale_product_type_id   INTEGER NOT NULL REFERENCES product_types(bsale_product_type_id),
+    name                    VARCHAR(200) NOT NULL DEFAULT 'SIN NOMBRE',
+    synced_at               TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+COMMENT ON TABLE product_type_attributes IS 'Atributos definidos por cada tipo de producto/categoria. Source: GET /v1/product_types/{id}/attributes.json';
+COMMENT ON COLUMN product_type_attributes.bsale_attribute_id IS 'ID del atributo en BSale (ej: 3 = "Personaje" para product_type 251)';
+
+CREATE INDEX IF NOT EXISTS idx_pta_product_type ON product_type_attributes(bsale_product_type_id);
+
+-- ============================================================
+-- VALORES DE ATRIBUTO POR VARIANTE (las etiquetas concretas)
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS variant_attribute_values (
+    bsale_av_id             INTEGER PRIMARY KEY,
+    bsale_variant_id        INTEGER NOT NULL REFERENCES variants(bsale_variant_id),
+    bsale_attribute_id      INTEGER NOT NULL REFERENCES product_type_attributes(bsale_attribute_id),
+    description             VARCHAR(500) NOT NULL,   -- el valor textual (ej: "DISNEY")
+    synced_at               TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+    UNIQUE(bsale_variant_id, bsale_attribute_id)
+);
+
+COMMENT ON TABLE variant_attribute_values IS 'Valores de atributo por variante. Source: GET /v1/variants/{id}/attribute_values.json';
+COMMENT ON COLUMN variant_attribute_values.description IS 'Valor textual del atributo (ej: "DISNEY", "FROZEN", "MARVEL")';
+
+CREATE INDEX IF NOT EXISTS idx_vav_variant ON variant_attribute_values(bsale_variant_id);
+CREATE INDEX IF NOT EXISTS idx_vav_attribute ON variant_attribute_values(bsale_attribute_id);

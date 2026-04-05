@@ -118,7 +118,7 @@ PostgreSQL ──> analytics/*.py ──> validaciones ──> reportes
 ### Instalación de paquetes (primera vez)
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
+source .venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
@@ -130,6 +130,11 @@ python run_harvest.py
 ### Sync Diaria (incremental)
 ```bash
 python run_daily_sync.py --days 6
+```
+
+### Sync solo atributos
+```bash
+python run_harvest.py --only attributes
 ```
 
 ### Programar en Windows Task Scheduler

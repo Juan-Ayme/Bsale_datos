@@ -7,13 +7,15 @@ Sincronizadores de entidades maestras (cambian poco).
   - products + variants (juntos, del mismo endpoint)
   - variant_costs
   - stock_levels
+  - product_type_attributes  (atributos definidos por categoria)
+  - variant_attribute_values (valores de atributo por variante)
 """
 
 import logging
 import concurrent.futures
 from typing import Any
 
-from harvester.bsale_client import paginate, fetch
+from harvester.bsale_client import paginate, fetch, fetch_subresource
 from harvester.config import BSALE_BASE_URL, BSALE_HEADERS, BSALE_MAX_WORKERS
 from harvester import db
 
@@ -536,6 +538,193 @@ def snapshot_stock_history() -> dict:
         db.sync_finish(log_id, inserted=stats["inserted"])
     except Exception as exc:
         db.sync_finish(log_id, status="FAILED", error=str(exc))
+        raise
+
+    return stats
+
+
+# ============================================================
+# PRODUCT TYPE ATTRIBUTES (atributos definidos por categoria)
+# ============================================================
+
+def sync_product_type_attributes() -> dict:
+    """
+    Sincroniza los tipos de atributo de cada categoria.
+
+    Por cada product_type en nuestra DB llama a:
+        GET /v1/product_types/{id}/attributes.json
+    e inserta los resultados en product_type_attributes.
+
+    Paralelizado con ThreadPoolExecutor (~246 llamadas, rapido).
+    """
+    log_id = db.sync_start("product_type_attributes")
+    stats = {"fetched": 0, "inserted": 0, "skipped": 0}
+
+    try:
+        # Obtener todos los product_type_ids de nuestra DB
+        with db.get_conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT bsale_product_type_id FROM product_types")
+                pt_ids = [row[0] for row in cur.fetchall()]
+
+        logger.info("Sincronizando atributos para %d categorias...", len(pt_ids))
+
+        def _fetch_attributes(pt_id: int) -> list[tuple]:
+            """Descarga los atributos de una categoria. Retorna lista de rows."""
+            url = f"{BSALE_BASE_URL}/product_types/{pt_id}/attributes.json"
+            data = fetch(url)
+            rows = []
+            if not data:
+                return rows
+            for item in data.get("items") or []:
+                aid = _safe_int(item.get("id"))
+                if aid == 0:
+                    return rows
+                name = _clean_str(item.get("name"), f"SIN NOMBRE [{aid}]")
+                rows.append((aid, pt_id, name))
+            return rows
+
+        all_rows: list[tuple] = []
+        done = 0
+        with concurrent.futures.ThreadPoolExecutor(max_workers=BSALE_MAX_WORKERS) as exe:
+            futures = {exe.submit(_fetch_attributes, pt_id): pt_id for pt_id in pt_ids}
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                all_rows.extend(result)
+                done += 1
+                if done % 50 == 0:
+                    logger.info("Atributos: %d/%d categorias procesadas", done, len(pt_ids))
+
+        stats["fetched"] = len(all_rows)
+
+        if all_rows:
+            sql = """
+                INSERT INTO product_type_attributes
+                    (bsale_attribute_id, bsale_product_type_id, name, synced_at)
+                VALUES (%s, %s, %s, NOW())
+                ON CONFLICT (bsale_attribute_id) DO UPDATE SET
+                    name      = EXCLUDED.name,
+                    synced_at = NOW()
+            """
+            stats["inserted"] = db.execute_batch(sql, all_rows)
+
+        # Categorias sin ningun atributo definido (normal: la mayoria no los tiene)
+        empty = len(pt_ids) - sum(1 for r in all_rows)
+        if empty > 0:
+            logger.info("%d categorias sin atributos (es normal)", empty)
+
+        db.sync_finish(log_id, fetched=stats["fetched"], inserted=stats["inserted"],
+                        skipped=stats["skipped"])
+    except Exception as exc:
+        db.sync_finish(log_id, status="FAILED", error=str(exc),
+                        fetched=stats["fetched"])
+        raise
+
+    return stats
+
+
+# ============================================================
+# VARIANT ATTRIBUTE VALUES (valores concretos por variante)
+# ============================================================
+
+def sync_variant_attribute_values() -> dict:
+    """
+    Sincroniza los valores de atributo de cada variante activa.
+
+    Por cada variant_id activo en nuestra DB llama a:
+        GET /v1/variants/{id}/attribute_values.json
+    e inserta en variant_attribute_values.
+
+    Solo inserta variantes cuyos atributos ya existen en
+    product_type_attributes (para respetar la FK).
+
+    Paralelizado con ThreadPoolExecutor (~3,375 llamadas, ~7-10 min).
+    """
+    log_id = db.sync_start("variant_attribute_values")
+    stats = {"fetched": 0, "inserted": 0, "skipped": 0}
+
+    try:
+        # Obtener variantes activas y atributos conocidos
+        with db.get_conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT bsale_variant_id FROM variants WHERE is_active = TRUE")
+                variant_ids = [row[0] for row in cur.fetchall()]
+
+                cur.execute("SELECT bsale_attribute_id FROM product_type_attributes")
+                known_attr_ids = {row[0] for row in cur.fetchall()}
+
+        logger.info("Sincronizando attribute_values para %d variantes activas...",
+                    len(variant_ids))
+
+        if not known_attr_ids:
+            logger.warning("No hay atributos en product_type_attributes. "
+                           "Ejecuta sync_product_type_attributes() primero.")
+            db.sync_finish(log_id, status="FAILED",
+                           error="Sin atributos en product_type_attributes")
+            return stats
+
+        def _fetch_av(vid: int) -> list[tuple]:
+            """Descarga attribute_values de una variante. Retorna lista de rows."""
+            url = f"{BSALE_BASE_URL}/variants/{vid}/attribute_values.json"
+            items = fetch_subresource(url)
+            rows = []
+            for item in items:
+                av_id   = _safe_int(item.get("id"))
+                av_desc = _clean_str(item.get("description"))
+                attr_id = _safe_int((item.get("attribute") or {}).get("id"))
+
+                if av_id == 0 or not av_desc:
+                    continue
+
+                # Solo insertar si el atributo padre ya existe en nuestra DB
+                if attr_id not in known_attr_ids:
+                    db.log_quality_issue(
+                        "variant_attribute_values", vid,
+                        "bsale_attribute_id", "ORPHAN_FK",
+                        f"Atributo {attr_id} no existe en product_type_attributes",
+                        str(attr_id),
+                    )
+                    continue
+
+                rows.append((av_id, vid, attr_id, av_desc))
+            return rows
+
+        all_rows: list[tuple] = []
+        done = 0
+        with concurrent.futures.ThreadPoolExecutor(max_workers=BSALE_MAX_WORKERS) as exe:
+            futures = {exe.submit(_fetch_av, vid): vid for vid in variant_ids}
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                all_rows.extend(result)
+                done += 1
+                if done % 500 == 0:
+                    logger.info("AttributeValues: %d/%d variantes procesadas",
+                                done, len(variant_ids))
+
+        stats["fetched"] = len(all_rows)
+
+        # Variantes sin ningun atributo (la gran mayoria)
+        with_attrs = sum(1 for r in all_rows)
+        logger.info("%d variantes tienen al menos un atributo (de %d totales)",
+                    with_attrs, len(variant_ids))
+
+        if all_rows:
+            sql = """
+                INSERT INTO variant_attribute_values
+                    (bsale_av_id, bsale_variant_id, bsale_attribute_id,
+                     description, synced_at)
+                VALUES (%s, %s, %s, %s, NOW())
+                ON CONFLICT (bsale_variant_id, bsale_attribute_id) DO UPDATE SET
+                    description = EXCLUDED.description,
+                    synced_at   = NOW()
+            """
+            stats["inserted"] = db.execute_batch(sql, all_rows)
+
+        db.sync_finish(log_id, fetched=stats["fetched"], inserted=stats["inserted"],
+                        skipped=stats["skipped"])
+    except Exception as exc:
+        db.sync_finish(log_id, status="FAILED", error=str(exc),
+                        fetched=stats["fetched"])
         raise
 
     return stats

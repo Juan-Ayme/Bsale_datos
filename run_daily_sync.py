@@ -35,6 +35,8 @@ from harvester.sync_masters import (
     sync_variant_costs,
     sync_stock_levels,
     snapshot_stock_history,
+    sync_product_type_attributes,
+    sync_variant_attribute_values,
 )
 from harvester.sync_transactions import sync_documents, sync_receptions
 
@@ -83,10 +85,12 @@ def main():
         # --- 1. Masters (siempre full, son pocos registros) ---
         logger.info(">>> FASE 1: Masters")
         for name, func in [
-            ("Sucursales", sync_offices),
-            ("Categorias", sync_product_types),
-            ("Tipos Doc", sync_document_types),
-            ("Variantes", sync_variants),
+            ("Sucursales",       sync_offices),
+            ("Categorias",       sync_product_types),
+            ("Tipos Doc",        sync_document_types),
+            ("Variantes",        sync_variants),
+            ("Atrib. Categoria", sync_product_type_attributes),
+            ("Atrib. Variantes", sync_variant_attribute_values),
         ]:
             t0 = time.time()
             r = func()
